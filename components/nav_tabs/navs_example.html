@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsTabs Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 100px; }
+      hr { margin: 3rem 0; }
+      .example-container { max-width: 900px; margin: 0 auto; }
+      .tab-pane { padding: 20px 0; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 example-container">
+      <h1>BsTabs Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-tabs&gt;</code> and <code>&lt;bs-tab&gt;</code> custom elements.</p>
+      
+      <section>
+        <h3>1. Basic Tabs</h3>
+        <p>A standard tabbed interface with fade transitions.</p>
+        <bs-tabs fade>
+          <bs-tab title="Home" active>
+            <p>This is the <strong>Home</strong> tab content. It's marked as <code>active</code> by default.</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </bs-tab>
+          <bs-tab title="Profile">
+            <p>This is the <strong>Profile</strong> tab content. It loads when you click the "Profile" tab.</p>
+            <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          </bs-tab>
+          <bs-tab title="Contact">
+            <p>This is the <strong>Contact</strong> tab content.</p>
+            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+          </bs-tab>
+          <bs-tab title="Disabled" disabled>
+            <p>This content should not be reachable because the tab is disabled.</p>
+          </bs-tab>
+        </bs-tabs>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. Pills Variant</h3>
+        <p>Uses <code>variant="pills"</code>.</p>
+        <bs-tabs variant="pills">
+          <bs-tab title="Home" active>
+            <p>Pills version of the Home tab.</p>
+          </bs-tab>
+          <bs-tab title="Profile">
+            <p>Pills version of the Profile tab.</p>
+          </bs-tab>
+          <bs-tab title="Settings">
+            <p>Pills version of the Settings tab.</p>
+          </bs-tab>
+        </bs-tabs>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Underline Variant</h3>
+        <p>Uses <code>variant="underline"</code> (Bootstrap 5.3+).</p>
+        <bs-tabs variant="underline">
+          <bs-tab title="Overview" active>
+            <p>Underline style is great for modern dashboards.</p>
+          </bs-tab>
+          <bs-tab title="Details">
+            <p>Details about the current item.</p>
+          </bs-tab>
+          <bs-tab title="History">
+            <p>View the history of changes.</p>
+          </bs-tab>
+        </bs-tabs>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. Vertical Tabs</h3>
+        <p>Uses <code>vertical</code> attribute (works best with pills).</p>
+        <bs-tabs variant="pills" vertical fade>
+          <bs-tab title="Home" active>
+            <h5>Vertical Home</h5>
+            <p>This is some placeholder content for the Home tab in a vertical layout.</p>
+          </bs-tab>
+          <bs-tab title="Profile">
+            <h5>Vertical Profile</h5>
+            <p>This is some placeholder content for the Profile tab in a vertical layout.</p>
+          </bs-tab>
+          <bs-tab title="Messages">
+            <h5>Vertical Messages</h5>
+            <p>This is some placeholder content for the Messages tab in a vertical layout.</p>
+          </bs-tab>
+          <bs-tab title="Settings">
+            <h5>Vertical Settings</h5>
+            <p>This is some placeholder content for the Settings tab in a vertical layout.</p>
+          </bs-tab>
+        </bs-tabs>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Fill and Justified</h3>
+        <p>Uses <code>fill</code> and <code>justified</code> attributes to control tab width.</p>
+        
+        <h5>Fill</h5>
+        <bs-tabs variant="pills" fill class="mb-4">
+          <bs-tab title="Active" active></bs-tab>
+          <bs-tab title="Much longer nav link"></bs-tab>
+          <bs-tab title="Link"></bs-tab>
+        </bs-tabs>
+
+        <h5>Justified</h5>
+        <bs-tabs variant="pills" justified>
+          <bs-tab title="Active" active></bs-tab>
+          <bs-tab title="Much longer nav link"></bs-tab>
+          <bs-tab title="Link"></bs-tab>
+        </bs-tabs>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>6. Custom Headers (Slots)</h3>
+        <p>Using <code>slot="header"</code> to include icons or complex HTML in tab triggers.</p>
+        <bs-tabs variant="tabs" fade>
+          <bs-tab active>
+            <div slot="header">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door me-1" viewBox="0 0 16 16">
+                 <path d="M8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4.5a.5.5 0 0 0 .5-.5v-4h2v4a.5.5 0 0 0 .5.5H14a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146zM2.5 14V7.707l5.5-5.5 5.5 5.5V14H10v-4a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5v4H2.5z"/>
+               </svg>
+               Home
+            </div>
+            <p>This tab has an icon in its header using a slot.</p>
+          </bs-tab>
+          <bs-tab title="Profile">
+             <div slot="header" class="text-primary">
+               <strong>Profile</strong>
+             </div>
+             <p>This tab has a bold colored title using a slot.</p>
+          </bs-tab>
+        </bs-tabs>
+      </section>
+
+    </div>
+
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Component -->
+    <script src="navs.js"></script>
+  </body>
+</html>

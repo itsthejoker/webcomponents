@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsAccordion Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 50px; }
+      hr { margin: 2rem 0; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <h1>BsAccordion Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-accordion&gt;</code> and <code>&lt;bs-accordion-item&gt;</code> custom elements.</p>
+      
+      <section>
+        <h3>1. Basic Accordion</h3>
+        <p>A standard accordion where only one item can be open at a time.</p>
+        
+        <bs-accordion id="basicAccordion">
+          <bs-accordion-item title="Accordion Item #1" expanded>
+            <strong>This is the first item's body.</strong> It is shown by default, because of the <code>expanded</code> attribute.
+          </bs-accordion-item>
+          <bs-accordion-item title="Accordion Item #2">
+            This is the second item's body. Opening this will close the first one.
+          </bs-accordion-item>
+          <bs-accordion-item title="Accordion Item #3">
+            This is the third item's body.
+          </bs-accordion-item>
+        </bs-accordion>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. Flush Accordion</h3>
+        <p>Uses the <code>flush</code> attribute to remove borders and rounded corners.</p>
+        
+        <bs-accordion flush>
+          <bs-accordion-item title="Flush Item #1">
+            Placeholder content for the first flush item.
+          </bs-accordion-item>
+          <bs-accordion-item title="Flush Item #2">
+            Placeholder content for the second flush item.
+          </bs-accordion-item>
+        </bs-accordion>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Always Open Accordion</h3>
+        <p>Uses the <code>always-open</code> attribute so items stay open when others are toggled.</p>
+        
+        <bs-accordion always-open>
+          <bs-accordion-item title="Always Open #1" expanded>
+            This item is open and will stay open even if you open the next one.
+          </bs-accordion-item>
+          <bs-accordion-item title="Always Open #2">
+            Go ahead, open me! The first one won't close.
+          </bs-accordion-item>
+        </bs-accordion>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. Custom Header Slot</h3>
+        <p>Uses the <code>slot="header"</code> to provide custom HTML for the accordion header.</p>
+        
+        <bs-accordion>
+          <bs-accordion-item>
+            <span slot="header" class="text-primary">
+              <i class="bi bi-star-fill"></i> <strong>Custom Header</strong> with Icon
+            </span>
+            You can put any HTML in the header using the <code>slot="header"</code>.
+          </bs-accordion-item>
+          <bs-accordion-item title="Regular Header">
+            This one uses the simple <code>title</code> attribute.
+          </bs-accordion-item>
+        </bs-accordion>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Programmatic Control</h3>
+        <p>Control accordion items using JavaScript methods: <code>show()</code>, <code>hide()</code>, <code>toggle()</code>.</p>
+        
+        <div class="mb-3">
+          <button class="btn btn-sm btn-outline-primary" onclick="document.getElementById('progItem').show()">Show Item</button>
+          <button class="btn btn-sm btn-outline-secondary" onclick="document.getElementById('progItem').hide()">Hide Item</button>
+          <button class="btn btn-sm btn-outline-info" onclick="document.getElementById('progItem').toggle()">Toggle Item</button>
+        </div>
+
+        <bs-accordion>
+          <bs-accordion-item id="progItem" title="Controlled Item">
+            I am being controlled by the buttons above.
+          </bs-accordion-item>
+        </bs-accordion>
+      </section>
+    </div>
+
+    <!-- Bootstrap Icons (for the custom header example) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Component -->
+    <script src="accordion.js"></script>
+  </body>
+</html>

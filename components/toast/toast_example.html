@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BsToast Web Component Demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding-bottom: 50px; }
+    hr { margin: 2rem 0; }
+    .example-container { max-width: 800px; margin: 0 auto; }
+    .toast-container-demo { 
+        position: relative; 
+        min-height: 200px; 
+        background-color: #f8f9fa; 
+        border: 1px solid #dee2e6;
+        border-radius: 0.375rem;
+        margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container mt-5 example-container">
+  <h1>BsToast Web Component Demo</h1>
+  <p class="lead">A custom web component wrapper for Bootstrap Toasts.</p>
+
+  <section>
+    <h3>Basic Toast</h3>
+    <p>A simple toast with a title and message. Click the button to show it.</p>
+    <div class="mb-3">
+        <button type="button" class="btn btn-primary" onclick="document.getElementById('basicToast').show()">Show Toast</button>
+    </div>
+    <div class="toast-container-demo p-3">
+        <bs-toast id="basicToast" title="Bootstrap" time="11 mins ago">
+            Hello, world! This is a toast message.
+        </bs-toast>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Live Example (Auto-show)</h3>
+    <p>Use the <code>show</code> attribute to display the toast immediately on load.</p>
+    <div class="toast-container-demo p-3">
+              <bs-toast title="Notification" time="just now" show>
+            This toast appeared automatically.
+        </bs-toast>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Stacking Toasts</h3>
+    <p>Toasts stack automatically when placed inside a <code>.toast-container</code>.</p>
+    <div class="toast-container-demo">
+        <div class="toast-container position-absolute top-0 end-0 p-3">
+            <bs-toast title="Message 1" time="just now" show>
+                First message in the stack.
+            </bs-toast>
+            <bs-toast title="Message 2" time="2 seconds ago" show>
+                Second message in the stack.
+            </bs-toast>
+        </div>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Custom Content</h3>
+    <p>Toasts can be simplified by omitting the header or adding custom slots. The component automatically handles the side-aligned close button for simple text-only toasts.</p>
+    <div class="toast-container-demo p-3">
+        <!-- Shorthand usage -->
+        <bs-toast show>
+            Hello, world! This is a toast message with automatic flex layout and close button.
+        </bs-toast>
+        
+        <!-- Manual structure for complex content -->
+        <bs-toast class="mt-3" show>
+            <div class="toast-body">
+                Hello, world! This is a toast message with manual body and custom buttons.
+                <div class="mt-2 pt-2 border-top">
+                    <button type="button" class="btn btn-primary btn-sm">Take action</button>
+                    <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast">Close</button>
+                </div>
+            </div>
+        </bs-toast>
+
+        <!-- Custom slot usage -->
+        <bs-toast class="mt-3" show>
+            <div slot="header" class="me-auto">
+                <strong class="me-2">Custom Header</strong>
+                <span class="badge bg-primary">New</span>
+            </div>
+            This toast uses a custom header slot.
+        </bs-toast>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Translucent</h3>
+    <p>Toasts are slightly translucent to blend in with what’s below them.</p>
+    <div class="toast-container-demo p-3 bg-dark">
+        <bs-toast title="Bootstrap" time="11 mins ago" show>
+            Hello, world! This is a toast message.
+        </bs-toast>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Color Schemes</h3>
+    <p>Use the <code>type</code> attribute to apply Bootstrap contextual colors.</p>
+    <div class="toast-container-demo">
+        <bs-toast type="primary" show>
+            This is a primary colored toast.
+        </bs-toast>
+        <bs-toast type="success" class="mt-2" show>
+            This is a success colored toast.
+        </bs-toast>
+        <bs-toast type="danger" class="mt-2" show>
+            This is a danger colored toast.
+        </bs-toast>
+    </div>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Placement</h3>
+    <p>Use Bootstrap's positioning utilities on a <code>.toast-container</code> to place toasts anywhere.</p>
+    <div class="toast-container-demo" style="min-height: 300px;">
+        <div class="toast-container position-absolute top-50 start-50 translate-middle p-3">
+            <bs-toast title="Centered" show autohide="false">
+                I'm right in the middle!
+            </bs-toast>
+        </div>
+    </div>
+  </section>
+</div>
+
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Toast Component -->
+<script src="toast.js"></script>
+
+</body>
+</html>

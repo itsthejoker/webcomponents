@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsCard Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 50px; }
+      hr { margin: 2rem 0; }
+      .example-container { max-width: 800px; margin: 0 auto; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 example-container">
+      <h1>BsCard Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-card&gt;</code> custom element.</p>
+      
+      <section>
+        <h3>1. Basic Card</h3>
+        <p>Uses <code>title</code>, <code>subtitle</code>, and <code>img-top</code> attributes.</p>
+        <bs-card title="Card Title" subtitle="Card Subtitle" img-top="https://placehold.co/600x400" style="width: 18rem;">
+          <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+        </bs-card>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. Header and Footer</h3>
+        <p>Uses <code>slot="header"</code> and <code>slot="footer"</code>.</p>
+        <bs-card title="Special title treatment">
+          <div slot="header">Featured Header</div>
+          <p>With supporting text below as a natural lead-in to additional content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
+          <div slot="footer" class="text-body-secondary">2 days ago</div>
+        </bs-card>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Colored Cards</h3>
+        <p>Uses <code>text-bg</code> and <code>border</code> attributes.</p>
+        <div class="row">
+          <div class="col-md-6 mb-3">
+            <bs-card text-bg="primary" title="Primary Card Title" subtitle="Header Subtitle">
+              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </bs-card>
+          </div>
+          <div class="col-md-6 mb-3">
+            <bs-card border="success" title="Success Border" class="text-success">
+               <div slot="header">Success Header</div>
+               <p>This card has a success border and custom text color.</p>
+            </bs-card>
+          </div>
+        </div>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. List Group Card</h3>
+        <p>Uses <code>no-body</code> attribute to include a list group directly.</p>
+        <bs-card no-body style="width: 18rem;">
+          <div slot="header">Featured</div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+            <li class="list-group-item">A third item</li>
+          </ul>
+        </bs-card>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Kitchen Sink (Mixed Content)</h3>
+        <p>Using <code>no-body</code> to mix multiple <code>.card-body</code> sections with <code>.list-group</code>.</p>
+        <bs-card no-body style="width: 18rem;" 
+                 img-top="https://placehold.co/600x200/007bff/ffffff?text=Top+Image" 
+                 img-bottom="https://placehold.co/600x200/6c757d/ffffff?text=Bottom+Image">
+          <div slot="header">Featured Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Kitchen Sink Card</h5>
+            <p class="card-text">This card uses <code>no-body</code> to allow flush list groups between multiple body sections.</p>
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">An item</li>
+            <li class="list-group-item">A second item</li>
+          </ul>
+          <div class="card-body">
+            <a href="#" class="card-link">Card link</a>
+            <a href="#" class="card-link">Another link</a>
+          </div>
+          <div slot="footer">Card Footer</div>
+        </bs-card>
+      </section>
+
+    </div>
+
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Component -->
+    <script src="card.js"></script>
+  </body>
+</html>

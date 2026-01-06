@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsCarousel Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 50px; }
+      hr { margin: 3rem 0; }
+      .example-container { max-width: 900px; margin: 0 auto; }
+      bs-carousel { margin-bottom: 2rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 example-container">
+      <h1>BsCarousel Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-carousel&gt;</code> and <code>&lt;bs-carousel-item&gt;</code> custom elements.</p>
+      
+      <section>
+        <h3>1. Basic Carousel</h3>
+        <p>A simple carousel with indicators and controls.</p>
+        <bs-carousel indicators controls>
+          <bs-carousel-item active img="https://placehold.co/800x400/777/fff?text=First+Slide" alt="First Slide"></bs-carousel-item>
+          <bs-carousel-item img="https://placehold.co/800x400/666/fff?text=Second+Slide" alt="Second Slide"></bs-carousel-item>
+          <bs-carousel-item img="https://placehold.co/800x400/555/fff?text=Third+Slide" alt="Third Slide"></bs-carousel-item>
+        </bs-carousel>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. With Captions</h3>
+        <p>Using <code>caption-title</code> and <code>caption-text</code> attributes.</p>
+        <bs-carousel indicators controls>
+          <bs-carousel-item active img="https://placehold.co/800x400/007bff/fff?text=Slide+1" 
+                            caption-title="First slide label" 
+                            caption-text="Some representative placeholder content for the first slide."></bs-carousel-item>
+          <bs-carousel-item img="https://placehold.co/800x400/6c757d/fff?text=Slide+2" 
+                            caption-title="Second slide label" 
+                            caption-text="Some representative placeholder content for the second slide."></bs-carousel-item>
+        </bs-carousel>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Crossfade & Dark Variant</h3>
+        <p>Uses <code>fade</code> and <code>dark</code> attributes.</p>
+        <bs-carousel fade dark indicators controls>
+          <bs-carousel-item active img="https://placehold.co/800x400/f8f9fa/333?text=Light+Slide+1" 
+                            caption-title="Dark variant" 
+                            caption-text="Controls and indicators are dark on this carousel."></bs-carousel-item>
+          <bs-carousel-item img="https://placehold.co/800x400/e9ecef/333?text=Light+Slide+2"></bs-carousel-item>
+        </bs-carousel>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. Custom Caption via Slot</h3>
+        <p>Using <code>slot="caption"</code> for complex content.</p>
+        <bs-carousel controls>
+          <bs-carousel-item active img="https://placehold.co/800x400/28a745/fff?text=Custom+Caption">
+            <div slot="caption">
+              <h3 class="text-warning">Warning Heading</h3>
+              <p>This caption uses a slot for custom HTML structure.</p>
+              <button class="btn btn-sm btn-outline-light">Action Button</button>
+            </div>
+          </bs-carousel-item>
+          <bs-carousel-item img="https://placehold.co/800x400/dc3545/fff?text=Simple+Slide"></bs-carousel-item>
+        </bs-carousel>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Autoplay & Individual Intervals</h3>
+        <p>Autoplays on load (<code>ride="carousel"</code>) and sets a 10s interval for the first slide.</p>
+        <bs-carousel ride="carousel" indicators controls>
+          <bs-carousel-item active interval="10000" img="https://placehold.co/800x400/343a40/fff?text=10+Seconds" 
+                            caption-title="Long Duration" 
+                            caption-text="This slide will stay for 10 seconds."></bs-carousel-item>
+          <bs-carousel-item interval="2000" img="https://placehold.co/800x400/495057/fff?text=2+Seconds" 
+                            caption-title="Short Duration" 
+                            caption-text="This slide will only stay for 2 seconds."></bs-carousel-item>
+        </bs-carousel>
+      </section>
+
+    </div>
+
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Component -->
+    <script src="carousel.js"></script>
+  </body>
+</html>

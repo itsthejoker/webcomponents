@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsPlaceholder Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.x/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 50px; }
+      hr { margin: 2rem 0; }
+      .example-container { max-width: 800px; margin: 0 auto; }
+      .card-example { width: 18rem; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 example-container">
+      <h1>BsPlaceholder Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-placeholder&gt;</code> custom element and its utility functions.</p>
+      
+      <section>
+        <h3>1. Basic Placeholders</h3>
+        <p>Uses the <code>col</code> attribute to set the width via grid columns.</p>
+        <bs-placeholder col="6"></bs-placeholder>
+        <bs-placeholder col="8"></bs-placeholder>
+        <bs-placeholder col="12"></bs-placeholder>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. Width and Color</h3>
+        <p>Uses <code>width</code> for custom sizing and <code>color</code> for theme variants.</p>
+        <bs-placeholder width="25%" color="primary"></bs-placeholder>
+        <bs-placeholder width="50%" color="success"></bs-placeholder>
+        <bs-placeholder width="75%" color="danger"></bs-placeholder>
+        <bs-placeholder width="100%" color="warning"></bs-placeholder>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Sizing</h3>
+        <p>Uses the <code>size</code> attribute (<code>lg</code>, <code>sm</code>, <code>xs</code>).</p>
+        <bs-placeholder col="12" size="lg"></bs-placeholder>
+        <bs-placeholder col="12"></bs-placeholder>
+        <bs-placeholder col="12" size="sm"></bs-placeholder>
+        <bs-placeholder col="12" size="xs"></bs-placeholder>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. Animation</h3>
+        <p>Uses the <code>animation</code> attribute (<code>glow</code>, <code>wave</code>).</p>
+        <bs-placeholder col="12" animation="glow"></bs-placeholder>
+        <bs-placeholder col="12" animation="wave"></bs-placeholder>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Placeholderize Utility</h3>
+        <p>This section demonstrates the <code>BsPlaceholder.placeholderize()</code> static method, which converts existing content into placeholders.</p>
+        
+        <div id="demo-card" class="card card-example mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline-primary" onclick="BsPlaceholder.placeholderize(document.getElementById('demo-card'))">
+            Placeholderize (Glow)
+          </button>
+          <button type="button" class="btn btn-outline-primary" onclick="BsPlaceholder.placeholderize(document.getElementById('demo-card'), { animation: 'wave', color: 'secondary' })">
+            Placeholderize (Wave + Secondary)
+          </button>
+          <button type="button" class="btn btn-outline-secondary" onclick="BsPlaceholder.restore(document.getElementById('demo-card'))">
+            Restore Content
+          </button>
+        </div>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>6. Loading Card Example</h3>
+        <p>A manual reconstruction of a loading card using the web component.</p>
+        <div class="card card-example" aria-hidden="true">
+          <div class="card-img-top bg-secondary" style="height: 180px;"></div>
+          <div class="card-body">
+            <h5 class="card-title">
+              <bs-placeholder col="6" animation="glow"></bs-placeholder>
+            </h5>
+            <p class="card-text">
+              <bs-placeholder col="7" animation="glow"></bs-placeholder>
+              <bs-placeholder col="4" animation="glow"></bs-placeholder>
+              <bs-placeholder col="4" animation="glow"></bs-placeholder>
+              <bs-placeholder col="6" animation="glow"></bs-placeholder>
+              <bs-placeholder col="8" animation="glow"></bs-placeholder>
+            </p>
+            <bs-placeholder col="6" size="lg" color="primary" animation="glow" style="display: block; height: 38px;"></bs-placeholder>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.x/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Component -->
+    <script src="placeholder.js"></script>
+  </body>
+</html>
