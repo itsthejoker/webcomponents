@@ -44,10 +44,23 @@ class BsTooltip extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
-    // Set display to inline-block to wrap content correctly
-    if (!this.style.display) {
-      this.style.display = 'inline-block';
+    // Set display to block/inline-block
+    this.style.display = 'inline-block';
+
+    const wrapper = document.createElement('div');
+    wrapper.style.display = 'inline-block';
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      wrapper.className += ` ${hostClasses}`;
     }
+
+    // Move children to the wrapper
+    while (this.firstChild) {
+      wrapper.appendChild(this.firstChild);
+    }
+    this.appendChild(wrapper);
 
     const title = this.getAttribute('data-bs-title') || this.getAttribute('title') || '';
     const placement = this.getAttribute('placement') || 'top';
@@ -59,7 +72,7 @@ class BsTooltip extends HTMLElement {
     const offset = this.getAttribute('offset') || [0, 6];
 
     if (window.bootstrap && window.bootstrap.Tooltip) {
-      this.tooltip = new bootstrap.Tooltip(this, {
+      this.tooltip = new bootstrap.Tooltip(wrapper, {
         title: title,
         placement: placement,
         animation: animation,

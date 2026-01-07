@@ -5,8 +5,8 @@
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
  * Attributes:
- * - variant: The type of spinner ('border' or 'grow'). Default: 'border'.
- * - type: The contextual color (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark').
+ * - animation: The type of spinner ('border' or 'grow'). Default: 'border'.
+ * - variant: The contextual color (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark').
  * - small: Boolean attribute; if present, the spinner will be smaller.
  * - label: Accessibility text for the spinner. Default: 'Loading...'.
  */
@@ -29,23 +29,29 @@ class BsSpinner extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
-    const variant = this.getAttribute('variant') || 'border';
-    const type = this.getAttribute('type');
+    const animation = this.getAttribute('animation') || 'border';
+    const variant = this.getAttribute('variant');
     const small = this.hasAttribute('small');
     const label = this.getAttribute('label') || 'Loading...';
 
     this.style.display = 'inline-block';
 
-    // The host element itself will be the spinner container
-    this.classList.add(`spinner-${variant}`);
-    this.setAttribute('role', 'status');
+    const spinnerElement = document.createElement('div');
+    spinnerElement.className = `spinner-${animation}`;
+    spinnerElement.setAttribute('role', 'status');
 
-    if (type) {
-      this.classList.add(`text-${type}`);
+    if (variant) {
+      spinnerElement.classList.add(`text-${variant}`);
     }
 
     if (small) {
-      this.classList.add(`spinner-${variant}-sm`);
+      spinnerElement.classList.add(`spinner-${animation}-sm`);
+    }
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      spinnerElement.className += ` ${hostClasses}`;
     }
 
     // Accessibility label
@@ -55,9 +61,9 @@ class BsSpinner extends HTMLElement {
     span.className = 'visually-hidden';
     span.textContent = label;
     
-    // Clear any placeholder text if it exists (though usually spinners are empty)
+    spinnerElement.appendChild(span);
     this.innerHTML = '';
-    this.appendChild(span);
+    this.appendChild(spinnerElement);
   }
 }
 

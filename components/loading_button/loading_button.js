@@ -19,6 +19,7 @@ class LoadingButton extends HTMLElement {
     this._enableBound = this.enable.bind(this);
     this._handleClickBound = this._handleClick.bind(this);
     this._isLoading = false;
+    this._isSimulatingClick = false;
   }
 
   connectedCallback() {
@@ -80,6 +81,10 @@ class LoadingButton extends HTMLElement {
   }
 
   _handleClick(e) {
+    if (this._isSimulatingClick) {
+      return;
+    }
+
     if (this._isLoading || this.button.disabled) {
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -94,21 +99,30 @@ class LoadingButton extends HTMLElement {
     // 1. Mark as loading and visually disable
     this._isLoading = true;
 
-    // 2. Delay the actual modifications to allow the current event
-    // (and any natural form submission) to proceed.
-    setTimeout(() => {
-      this.button.style.width = `${currentWidth}px`;
-      this.button.classList.add("disabled");
-      this.button.style.pointerEvents = "none";
-      this.style.cursor = "wait";
-      this.button.innerHTML = `<div class="text-center"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden">Loading...</span></div>`;
-      this.button.disabled = true;
-    }, 0);
+    // 2. Update UI immediately to show the spinner.
+    // We do this BEFORE the delay so it's ready to be painted.
+    this.button.style.width = `${currentWidth}px`;
+    this.button.classList.add("disabled");
+    this.button.style.pointerEvents = "none";
+    this.style.cursor = "wait";
+    this.button.innerHTML = `<div class="text-center"><span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span><span class="visually-hidden">Loading...</span></div>`;
 
-    // We don't stop propagation or prevent default here unless already disabled.
-    // The original click event will continue to bubble up to the custom element (loading-button),
-    // triggering any 'onclick' or 'click' listeners attached to it.
-    // Those listeners will see the button in its new loading state.
+    // 3. Stop the current event from bubbling immediately.
+    // This prevents parent listeners (like form onsubmit) from blocking
+    // the UI thread with alerts before the browser can paint our changes.
+    e.preventDefault();
+    e.stopPropagation();
+
+    // 4. Re-dispatch the click after a short delay to allow the browser to paint.
+    setTimeout(() => {
+      try {
+        this._isSimulatingClick = true;
+        this.button.click();
+      } finally {
+        this._isSimulatingClick = false;
+        this.button.disabled = true;
+      }
+    }, 10);
   }
 
   enable() {

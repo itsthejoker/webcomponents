@@ -51,12 +51,22 @@ class BsCard extends HTMLElement {
     const borderAttr = this.getAttribute('border');
     const noBody = this.hasAttribute('no-body');
 
-    this.classList.add('card');
+    this.style.display = 'block';
+
+    const cardElement = document.createElement('div');
+    cardElement.className = 'card';
+    
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      cardElement.className += ` ${hostClasses}`;
+    }
+
     if (textBgAttr) {
-      this.classList.add(`text-bg-${textBgAttr}`);
+      cardElement.classList.add(`text-bg-${textBgAttr}`);
     }
     if (borderAttr) {
-      this.classList.add(`border-${borderAttr}`);
+      cardElement.classList.add(`border-${borderAttr}`);
     }
 
     // Capture children and clear innerHTML for the new structure
@@ -65,7 +75,7 @@ class BsCard extends HTMLElement {
       fragment.appendChild(this.firstChild);
     }
 
-    this.innerHTML = `
+    cardElement.innerHTML = `
       <div class="card-img-top-container"></div>
       <div class="card-header-container"></div>
       <div class="card-body-container"></div>
@@ -73,11 +83,14 @@ class BsCard extends HTMLElement {
       <div class="card-img-bottom-container"></div>
     `;
 
-    const imgTopContainer = this.querySelector('.card-img-top-container');
-    const headerContainer = this.querySelector('.card-header-container');
-    const bodyContainer = this.querySelector('.card-body-container');
-    const footerContainer = this.querySelector('.card-footer-container');
-    const imgBottomContainer = this.querySelector('.card-img-bottom-container');
+    this.innerHTML = '';
+    this.appendChild(cardElement);
+
+    const imgTopContainer = cardElement.querySelector('.card-img-top-container');
+    const headerContainer = cardElement.querySelector('.card-header-container');
+    const bodyContainer = cardElement.querySelector('.card-body-container');
+    const footerContainer = cardElement.querySelector('.card-footer-container');
+    const imgBottomContainer = cardElement.querySelector('.card-img-bottom-container');
 
     // Create the body structure if not no-body
     let actualBody = bodyContainer;

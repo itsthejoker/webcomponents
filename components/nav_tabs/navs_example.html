@@ -38,6 +38,22 @@
             <p>This content should not be reachable because the tab is disabled.</p>
           </bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;bs-tabs fade&gt;
+  &lt;bs-tab title="Home" active&gt;
+    &lt;p&gt;This is the &lt;strong&gt;Home&lt;/strong&gt; tab content. It's marked as &lt;code&gt;active&lt;/code&gt; by default.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Profile"&gt;
+    &lt;p&gt;This is the &lt;strong&gt;Profile&lt;/strong&gt; tab content.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Contact"&gt;
+    &lt;p&gt;This is the &lt;strong&gt;Contact&lt;/strong&gt; tab content.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Disabled" disabled&gt;
+    &lt;p&gt;This content should not be reachable because the tab is disabled.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -56,6 +72,19 @@
             <p>Pills version of the Settings tab.</p>
           </bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;bs-tabs variant="pills"&gt;
+  &lt;bs-tab title="Home" active&gt;
+    &lt;p&gt;Pills version of the Home tab.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Profile"&gt;
+    &lt;p&gt;Pills version of the Profile tab.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Settings"&gt;
+    &lt;p&gt;Pills version of the Settings tab.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -74,6 +103,19 @@
             <p>View the history of changes.</p>
           </bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;bs-tabs variant="underline"&gt;
+  &lt;bs-tab title="Overview" active&gt;
+    &lt;p&gt;Underline style is great for modern dashboards.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Details"&gt;
+    &lt;p&gt;Details about the current item.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="History"&gt;
+    &lt;p&gt;View the history of changes.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -99,6 +141,26 @@
             <p>This is some placeholder content for the Settings tab in a vertical layout.</p>
           </bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;bs-tabs variant="pills" vertical fade&gt;
+  &lt;bs-tab title="Home" active&gt;
+    &lt;h5&gt;Vertical Home&lt;/h5&gt;
+    &lt;p&gt;This is some placeholder content for the Home tab in a vertical layout.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Profile"&gt;
+    &lt;h5&gt;Vertical Profile&lt;/h5&gt;
+    &lt;p&gt;This is some placeholder content for the Profile tab in a vertical layout.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Messages"&gt;
+    &lt;h5&gt;Vertical Messages&lt;/h5&gt;
+    &lt;p&gt;This is some placeholder content for the Messages tab in a vertical layout.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Settings"&gt;
+    &lt;h5&gt;Vertical Settings&lt;/h5&gt;
+    &lt;p&gt;This is some placeholder content for the Settings tab in a vertical layout.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -120,6 +182,21 @@
           <bs-tab title="Much longer nav link"></bs-tab>
           <bs-tab title="Link"></bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;!-- Fill --&gt;
+&lt;bs-tabs variant="pills" fill&gt;
+  &lt;bs-tab title="Active" active&gt;&lt;/bs-tab&gt;
+  &lt;bs-tab title="Much longer nav link"&gt;&lt;/bs-tab&gt;
+  &lt;bs-tab title="Link"&gt;&lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+
+&lt;!-- Justified --&gt;
+&lt;bs-tabs variant="pills" justified&gt;
+  &lt;bs-tab title="Active" active&gt;&lt;/bs-tab&gt;
+  &lt;bs-tab title="Much longer nav link"&gt;&lt;/bs-tab&gt;
+  &lt;bs-tab title="Link"&gt;&lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -144,6 +221,22 @@
              <p>This tab has a bold colored title using a slot.</p>
           </bs-tab>
         </bs-tabs>
+        <bs-code-block class="mt-2">
+&lt;bs-tabs variant="tabs" fade&gt;
+  &lt;bs-tab active&gt;
+    &lt;div slot="header"&gt;
+       &lt;i class="bi bi-house-door me-1"&gt;&lt;/i&gt; Home
+    &lt;/div&gt;
+    &lt;p&gt;This tab has an icon in its header using a slot.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+  &lt;bs-tab title="Profile"&gt;
+     &lt;div slot="header" class="text-primary"&gt;
+       &lt;strong&gt;Profile&lt;/strong&gt;
+     &lt;/div&gt;
+     &lt;p&gt;This tab has a bold colored title using a slot.&lt;/p&gt;
+  &lt;/bs-tab&gt;
+&lt;/bs-tabs&gt;
+        </bs-code-block>
       </section>
 
     </div>
@@ -152,5 +245,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Load our Web Component -->
     <script src="navs.js"></script>
+    <script src="../code_block/code_block.js"></script>
   </body>
 </html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MainContainer Web Component Demo</title>
+  <!-- Standard Bootstrap Setup -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding-bottom: 50px; }
+    hr { margin: 2rem 0; }
+    .example-container { max-width: 800px; margin: 0 auto; }
+
+    /* Mandatory styles for MainContainer FOUC protection */
+    main-container {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+
+<main-container class="container mt-5 example-container">
+  <h1>MainContainer Web Component Demo</h1>
+  <p class="lead">
+    A main container component that protects against Flash of Unstyled Content (FOUC).
+  </p>
+
+  <hr>
+
+  <section>
+    <h3>Usage</h3>
+    <p>
+      The <code>&lt;main-container&gt;</code> component acts as a wrapper for your application's main content.
+      It is specifically designed to handle the "Flash of Unstyled Content" that often occurs when using web components.
+    </p>
+    <p>
+      To use it effectively, follow these steps:
+    </p>
+    <ol>
+      <li>Wrap your main content in <code>&lt;main-container&gt;</code>.</li>
+      <li>Add CSS to set <code>main-container { opacity: 0; }</code> and a <code>transition: opacity ...</code>.</li>
+      <li>The component will show a spinner and wait for all custom elements (tags with a hyphen) to be upgraded.</li>
+      <li>Once ready, it fades in the content.</li>
+    </ol>
+    <bs-code-block class="mt-2">
+&lt;style&gt;
+/* Mandatory styles for main-container FOUC protection */
+main-container {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+&lt;/style&gt;
+
+&lt;!-- Note that the main.js script is loaded first --&gt;
+&lt;script src="main.js"&gt;&lt;/script&gt;
+&lt;main-container&gt;
+  &lt;h1&gt;Main Content&lt;/h1&gt;
+  &lt;p&gt;Your content here.&lt;/p&gt;
+&lt;/main-container&gt;
+    </bs-code-block>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Delayed Loading Demo</h3>
+    <p>
+      Below is a <code>&lt;delayed-element&gt;</code>. In this demo, it is intentionally not defined for 2 seconds.
+      You should have seen the spinner until the definition is registered.
+    </p>
+    <delayed-element></delayed-element>
+    <bs-code-block class="mt-2">
+&lt;delayed-element&gt;&lt;/delayed-element&gt;
+    </bs-code-block>
+  </section>
+
+  <hr>
+
+  <section>
+    <h3>Bootstrap Integration</h3>
+    <p>
+      Since <code>&lt;main-container&gt;</code> wraps its content in a standard <code>&lt;main&gt;</code> tag,
+      Bootstrap styles and other custom elements work perfectly inside it.
+    </p>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Bootstrap Card</h5>
+            <p class="card-text">Everything looks great once the FOUC protection releases.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <bs-code-block class="mt-2">
+&lt;div class="row"&gt;
+  &lt;div class="col-md-6"&gt;
+    &lt;div class="card"&gt;
+      &lt;div class="card-body"&gt;
+        &lt;h5 class="card-title"&gt;Bootstrap Card&lt;/h5&gt;
+        &lt;p class="card-text"&gt;Everything looks great once the FOUC protection releases.&lt;/p&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+    </bs-code-block>
+  </section>
+
+</main-container>
+
+<!-- Load Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Load our Web Component -->
+<script src="main.js"></script>
+<script src="../code_block/code_block.js"></script>
+
+<script>
+  // Simulate a delayed custom element registration for demonstration purposes
+  setTimeout(() => {
+    class DelayedElement extends HTMLElement {
+      connectedCallback() {
+        this.innerHTML = `
+          <div class="alert alert-success mt-3">
+            <h4 class="alert-heading">Delayed Element Ready!</h4>
+            <p>I was defined 2 seconds after the page started. The <code>&lt;main-container&gt;</code> component waited for me before fading in.</p>
+          </div>
+        `;
+      }
+    }
+    // Only define it if not already defined (idempotency)
+    if (!customElements.get('delayed-element')) {
+      customElements.define('delayed-element', DelayedElement);
+    }
+  }, 2000);
+</script>
+
+</body>
+</html>

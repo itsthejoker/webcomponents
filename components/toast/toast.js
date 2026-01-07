@@ -10,7 +10,7 @@
  * - autohide: Boolean attribute (default: true). Set to "false" to disable.
  * - delay: Delay in milliseconds before hiding the toast (default: 5000).
  * - animation: Boolean attribute (default: true). Set to "false" to disable.
- * - type: Contextual variant for color schemes (e.g., 'primary', 'success').
+ * - variant: Contextual variant for color schemes (e.g., 'primary', 'success').
  * - show: Boolean attribute; if present, the toast will be shown immediately.
  *
  * Slots:
@@ -47,7 +47,7 @@ class BsToast extends HTMLElement {
 
     const titleAttr = this.getAttribute('title');
     const timeAttr = this.getAttribute('time');
-    const typeAttr = this.getAttribute('type');
+    const variantAttr = this.getAttribute('variant');
     const autohide = this.getAttribute('autohide') !== 'false';
     const delay = parseInt(this.getAttribute('delay') || '5000', 10);
     const animation = this.getAttribute('animation') !== 'false';
@@ -78,8 +78,8 @@ class BsToast extends HTMLElement {
     this.removeAttribute('aria-live');
     this.removeAttribute('aria-atomic');
 
-    if (typeAttr) {
-      toastContainer.classList.add(`text-bg-${typeAttr}`, 'border-0');
+    if (variantAttr) {
+      toastContainer.classList.add(`text-bg-${variantAttr}`, 'border-0');
     }
 
     // Capture children and clear innerHTML for the new structure
@@ -156,7 +156,7 @@ class BsToast extends HTMLElement {
       const closeBtn = document.createElement('button');
       closeBtn.type = 'button';
       closeBtn.className = 'btn-close ms-2';
-      if (typeAttr) closeBtn.classList.add('btn-close-white');
+      if (variantAttr) closeBtn.classList.add('btn-close-white');
       closeBtn.setAttribute('data-bs-dismiss', 'toast');
       closeBtn.setAttribute('aria-label', 'Close');
       headerDiv.appendChild(closeBtn);
@@ -200,7 +200,7 @@ class BsToast extends HTMLElement {
         const closeBtn = document.createElement('button');
         closeBtn.type = 'button';
         closeBtn.className = 'btn-close me-2 m-auto';
-        if (typeAttr) {
+        if (variantAttr) {
           closeBtn.classList.add('btn-close-white');
         }
         closeBtn.setAttribute('data-bs-dismiss', 'toast');

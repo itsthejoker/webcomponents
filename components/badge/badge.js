@@ -5,7 +5,7 @@
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
  * Attributes:
- * - type: The contextual variant (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'). Default: 'secondary'.
+ * - variant: The contextual variant (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'). Default: 'secondary'.
  * - pill: Boolean attribute; if present, the badge will have a rounded-pill shape.
  * - text: Simple text content for the badge (overridden by child content).
  *
@@ -31,27 +31,35 @@ class BsBadge extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
-    const typeAttr = this.getAttribute('type') || 'secondary';
+    const variantAttr = this.getAttribute('variant') || 'secondary';
     const pill = this.hasAttribute('pill');
     const textAttr = this.getAttribute('text');
 
-    this.classList.add('badge');
-    
-    // Bootstrap 5.3+ recommends text-bg-{color} for badges to ensure contrast.
-    this.classList.add(`text-bg-${typeAttr}`);
+    const badgeElement = document.createElement('span');
+    badgeElement.className = `badge text-bg-${variantAttr}`;
 
     if (pill) {
-      this.classList.add('rounded-pill');
+      badgeElement.classList.add('rounded-pill');
+    }
+
+    // Pass through classes from the host element to the underlying span
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      badgeElement.className += ` ${hostClasses}`;
     }
 
     // If text attribute is provided and there are no children, use it
     if (textAttr && this.childNodes.length === 0) {
-      this.textContent = textAttr;
+      badgeElement.textContent = textAttr;
+    } else {
+        // Move children to the badge element
+        while (this.firstChild) {
+            badgeElement.appendChild(this.firstChild);
+        }
     }
     
-    // Note: Since we are not using Shadow DOM and we are applying classes to the host element,
-    // we don't necessarily need to move children unless we wanted a more complex internal structure.
-    // For a badge, the host element itself IS the badge.
+    this.innerHTML = '';
+    this.appendChild(badgeElement);
   }
 }
 

@@ -34,6 +34,9 @@ class BsNavbar extends HTMLElement {
 
     const navbarId = this.id || `navbar-${Math.random().toString(36).substr(2, 9)}`;
     const collapseId = `${navbarId}-collapse`;
+    
+    this.style.display = 'block';
+    if (theme) this.setAttribute('data-bs-theme', theme);
 
     const nav = document.createElement('nav');
     let expandClass = '';
@@ -44,8 +47,17 @@ class BsNavbar extends HTMLElement {
     }
     
     nav.className = `navbar ${expandClass} bg-${background}`.trim();
-    if (placement) nav.classList.add(placement);
+    if (placement) {
+      this.classList.add(placement);
+      nav.classList.add(placement);
+    }
     if (theme) nav.setAttribute('data-bs-theme', theme);
+
+    // Pass through classes from the host element to the underlying nav
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      nav.className += ` ${hostClasses}`;
+    }
 
     const container = document.createElement('div');
     container.className = containerType === 'standard' ? 'container' : `container-${containerType}`;
@@ -108,9 +120,16 @@ class BsNavbarBrand extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
     const href = this.getAttribute('href');
+    this.style.display = 'inline-block';
     const el = href ? document.createElement('a') : document.createElement('span');
     el.className = 'navbar-brand';
     if (href) el.href = href;
+
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      el.className += ` ${hostClasses}`;
+    }
     
     while (this.firstChild) {
       el.appendChild(this.firstChild);
@@ -138,14 +157,30 @@ class BsNavbarNav extends HTMLElement {
   _render() {
     if (this._initialized) return;
     this._initialized = true;
-    this.classList.add('navbar-nav');
+
+    this.style.display = 'block';
+
+    const navElement = document.createElement('div');
+    navElement.className = 'navbar-nav';
+
     if (this.hasAttribute('scroll')) {
-      this.classList.add('navbar-nav-scroll');
+      navElement.classList.add('navbar-nav-scroll');
       const scrollHeight = this.getAttribute('scroll-height');
       if (scrollHeight) {
-        this.style.setProperty('--bs-scroll-height', scrollHeight);
+        navElement.style.setProperty('--bs-scroll-height', scrollHeight);
       }
     }
+
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      navElement.className += ` ${hostClasses}`;
+    }
+
+    while (this.firstChild) {
+      navElement.appendChild(this.firstChild);
+    }
+    this.appendChild(navElement);
   }
 }
 
@@ -157,7 +192,7 @@ class BsNavbarNav extends HTMLElement {
  * - active: Boolean attribute; if present, the link is displayed as active.
  * - disabled: Boolean attribute; if present, the link is displayed as disabled.
  */
-class BsNavLink extends HTMLElement {
+class BsNavbarLink extends HTMLElement {
   constructor() {
     super();
     this._initialized = false;
@@ -173,7 +208,17 @@ class BsNavLink extends HTMLElement {
     const active = this.hasAttribute('active');
     const disabled = this.hasAttribute('disabled');
 
-    this.className = 'nav-item';
+    this.style.display = 'block';
+
+    const li = document.createElement('div');
+    li.className = 'nav-item';
+    
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      li.className += ` ${hostClasses}`;
+    }
+
     const link = document.createElement('a');
     link.className = `nav-link ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`.trim();
     link.href = href;
@@ -183,7 +228,8 @@ class BsNavLink extends HTMLElement {
     while (this.firstChild) {
       link.appendChild(this.firstChild);
     }
-    this.appendChild(link);
+    li.appendChild(link);
+    this.appendChild(li);
   }
 }
 
@@ -194,7 +240,7 @@ class BsNavLink extends HTMLElement {
  * - title: The text for the dropdown toggle.
  * - active: Boolean attribute; if present, the dropdown is displayed as active.
  */
-class BsNavDropdown extends HTMLElement {
+class BsNavbarDropdown extends HTMLElement {
   constructor() {
     super();
     this._initialized = false;
@@ -210,7 +256,16 @@ class BsNavDropdown extends HTMLElement {
     const title = this.getAttribute('title') || '';
     const active = this.hasAttribute('active');
 
-    this.className = 'nav-item dropdown';
+    this.style.display = 'block';
+
+    const dropdownElement = document.createElement('div');
+    dropdownElement.className = 'nav-item dropdown';
+    
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      dropdownElement.className += ` ${hostClasses}`;
+    }
     
     const link = document.createElement('a');
     link.className = `nav-link dropdown-toggle ${active ? 'active' : ''}`.trim();
@@ -232,8 +287,9 @@ class BsNavDropdown extends HTMLElement {
 
     const children = Array.from(this.childNodes);
     this.innerHTML = '';
-    this.appendChild(link);
-    this.appendChild(menu);
+    this.appendChild(dropdownElement);
+    dropdownElement.appendChild(link);
+    dropdownElement.appendChild(menu);
 
     children.forEach(child => {
       // Skip the title slot if we already used it
@@ -265,7 +321,7 @@ class BsNavDropdown extends HTMLElement {
  * - active: Boolean attribute; if present, the item is displayed as active.
  * - disabled: Boolean attribute; if present, the item is displayed as disabled.
  */
-class BsDropdownItem extends HTMLElement {
+class BsNavbarDropdownItem extends HTMLElement {
   constructor() {
     super();
     this._initialized = false;
@@ -281,11 +337,19 @@ class BsDropdownItem extends HTMLElement {
     const active = this.hasAttribute('active');
     const disabled = this.hasAttribute('disabled');
 
+    this.style.display = 'block';
+
     const link = document.createElement('a');
     link.className = `dropdown-item ${active ? 'active' : ''} ${disabled ? 'disabled' : ''}`.trim();
     link.href = href;
     if (active) link.setAttribute('aria-current', 'page');
     if (disabled) link.setAttribute('aria-disabled', 'true');
+
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      link.className += ` ${hostClasses}`;
+    }
 
     while (this.firstChild) {
       link.appendChild(this.firstChild);
@@ -297,7 +361,7 @@ class BsDropdownItem extends HTMLElement {
 /**
  * A custom web component for a divider within a navbar dropdown.
  */
-class BsDropdownDivider extends HTMLElement {
+class BsNavbarDropdownDivider extends HTMLElement {
   constructor() {
     super();
     this._initialized = false;
@@ -307,6 +371,12 @@ class BsDropdownDivider extends HTMLElement {
     this._initialized = true;
     const hr = document.createElement('hr');
     hr.className = 'dropdown-divider';
+
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      hr.className += ` ${hostClasses}`;
+    }
     this.appendChild(hr);
   }
 }
@@ -322,7 +392,22 @@ class BsNavbarText extends HTMLElement {
   connectedCallback() {
     if (this._initialized) return;
     this._initialized = true;
-    this.classList.add('navbar-text');
+
+    this.style.display = 'inline-block';
+
+    const span = document.createElement('span');
+    span.className = 'navbar-text';
+
+    // Pass through classes from the host element to the underlying element
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      span.className += ` ${hostClasses}`;
+    }
+
+    while (this.firstChild) {
+      span.appendChild(this.firstChild);
+    }
+    this.appendChild(span);
   }
 }
 
@@ -336,17 +421,17 @@ if (!customElements.get('bs-navbar-brand')) {
 if (!customElements.get('bs-navbar-nav')) {
   customElements.define('bs-navbar-nav', BsNavbarNav);
 }
-if (!customElements.get('bs-nav-link')) {
-  customElements.define('bs-nav-link', BsNavLink);
+if (!customElements.get('bs-navbar-link')) {
+  customElements.define('bs-navbar-link', BsNavbarLink);
 }
-if (!customElements.get('bs-nav-dropdown')) {
-  customElements.define('bs-nav-dropdown', BsNavDropdown);
+if (!customElements.get('bs-navbar-dropdown')) {
+  customElements.define('bs-navbar-dropdown', BsNavbarDropdown);
 }
-if (!customElements.get('bs-dropdown-item')) {
-  customElements.define('bs-dropdown-item', BsDropdownItem);
+if (!customElements.get('bs-navbar-dropdown-item')) {
+  customElements.define('bs-navbar-dropdown-item', BsNavbarDropdownItem);
 }
-if (!customElements.get('bs-dropdown-divider')) {
-  customElements.define('bs-dropdown-divider', BsDropdownDivider);
+if (!customElements.get('bs-navbar-dropdown-divider')) {
+  customElements.define('bs-navbar-dropdown-divider', BsNavbarDropdownDivider);
 }
 if (!customElements.get('bs-navbar-text')) {
   customElements.define('bs-navbar-text', BsNavbarText);

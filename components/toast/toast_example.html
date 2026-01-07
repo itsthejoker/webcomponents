@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BsToast Web Component Demo</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body { padding-bottom: 50px; }
     hr { margin: 2rem 0; }
@@ -36,6 +36,13 @@
             Hello, world! This is a toast message.
         </bs-toast>
     </div>
+    <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-primary" onclick="document.getElementById('basicToast').show()"&gt;Show Toast&lt;/button&gt;
+
+&lt;bs-toast id="basicToast" title="Bootstrap" time="11 mins ago"&gt;
+    Hello, world! This is a toast message.
+&lt;/bs-toast&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -48,6 +55,11 @@
             This toast appeared automatically.
         </bs-toast>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-toast title="Notification" time="just now" show&gt;
+    This toast appeared automatically.
+&lt;/bs-toast&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -65,6 +77,16 @@
             </bs-toast>
         </div>
     </div>
+    <bs-code-block class="mt-2">
+&lt;div class="toast-container position-absolute top-0 end-0 p-3"&gt;
+    &lt;bs-toast title="Message 1" time="just now" show&gt;
+        First message in the stack.
+    &lt;/bs-toast&gt;
+    &lt;bs-toast title="Message 2" time="2 seconds ago" show&gt;
+        Second message in the stack.
+    &lt;/bs-toast&gt;
+&lt;/div&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -98,6 +120,32 @@
             This toast uses a custom header slot.
         </bs-toast>
     </div>
+    <bs-code-block class="mt-2">
+&lt;!-- Shorthand usage --&gt;
+&lt;bs-toast show&gt;
+    Hello, world! This is a toast message with automatic flex layout and close button.
+&lt;/bs-toast&gt;
+
+&lt;!-- Manual structure for complex content --&gt;
+&lt;bs-toast show&gt;
+    &lt;div class="toast-body"&gt;
+        Hello, world! This is a toast message with manual body and custom buttons.
+        &lt;div class="mt-2 pt-2 border-top"&gt;
+            &lt;button type="button" class="btn btn-primary btn-sm"&gt;Take action&lt;/button&gt;
+            &lt;button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="toast"&gt;Close&lt;/button&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/bs-toast&gt;
+
+&lt;!-- Custom slot usage --&gt;
+&lt;bs-toast show&gt;
+    &lt;div slot="header" class="me-auto"&gt;
+        &lt;strong class="me-2"&gt;Custom Header&lt;/strong&gt;
+        &lt;span class="badge bg-primary"&gt;New&lt;/span&gt;
+    &lt;/div&gt;
+    This toast uses a custom header slot.
+&lt;/bs-toast&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -110,24 +158,44 @@
             Hello, world! This is a toast message.
         </bs-toast>
     </div>
+    <bs-code-block class="mt-2">
+&lt;div class="bg-dark p-3"&gt;
+    &lt;bs-toast title="Bootstrap" time="11 mins ago" show&gt;
+        Hello, world! This is a toast message.
+    &lt;/bs-toast&gt;
+&lt;/div&gt;
+    </bs-code-block>
   </section>
 
   <hr>
 
   <section>
     <h3>Color Schemes</h3>
-    <p>Use the <code>type</code> attribute to apply Bootstrap contextual colors.</p>
+    <p>Use the <code>variant</code> attribute to apply Bootstrap contextual colors.</p>
     <div class="toast-container-demo">
-        <bs-toast type="primary" show>
-            This is a primary colored toast.
-        </bs-toast>
-        <bs-toast type="success" class="mt-2" show>
-            This is a success colored toast.
-        </bs-toast>
-        <bs-toast type="danger" class="mt-2" show>
-            This is a danger colored toast.
-        </bs-toast>
+      <bs-toast variant="primary" show>
+        This is a primary colored toast.
+      </bs-toast>
+      <bs-toast variant="success" class="mt-2" show>
+        This is a success colored toast.
+      </bs-toast>
+      <bs-toast variant="danger" class="mt-2" show>
+        This is a danger colored toast.
+      </bs-toast>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-toast variant="primary" show&gt;
+    This is a primary colored toast.
+&lt;/bs-toast&gt;
+
+&lt;bs-toast variant="success" show&gt;
+    This is a success colored toast.
+&lt;/bs-toast&gt;
+
+&lt;bs-toast variant="danger" show&gt;
+    This is a danger colored toast.
+&lt;/bs-toast&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -142,6 +210,13 @@
             </bs-toast>
         </div>
     </div>
+    <bs-code-block class="mt-2">
+&lt;div class="toast-container position-absolute top-50 start-50 translate-middle p-3"&gt;
+    &lt;bs-toast title="Centered" show autohide="false"&gt;
+        I'm right in the middle!
+    &lt;/bs-toast&gt;
+&lt;/div&gt;
+    </bs-code-block>
   </section>
 </div>
 
@@ -149,6 +224,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Toast Component -->
 <script src="toast.js"></script>
+<script src="../code_block/code_block.js"></script>
 
 </body>
 </html>

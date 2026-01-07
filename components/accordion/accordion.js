@@ -25,12 +25,35 @@ class BsAccordion extends HTMLElement {
       this.id = `accordion-${Math.random().toString(36).substr(2, 9)}`;
     }
 
-    this.classList.add('accordion');
+    setTimeout(() => {
+      this._render();
+    }, 0);
+  }
+
+  _render() {
+    if (this._initialized) return;
+    this._initialized = true;
+
+    this.style.display = 'block';
+
+    const container = document.createElement('div');
+    container.classList.add('accordion');
     if (this.hasAttribute('flush')) {
-      this.classList.add('accordion-flush');
+      container.classList.add('accordion-flush');
+    }
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      container.className += ` ${hostClasses}`;
+    }
+
+    // Move children to the container
+    while (this.firstChild) {
+      container.appendChild(this.firstChild);
     }
     
-    this._initialized = true;
+    this.appendChild(container);
   }
 }
 
@@ -80,6 +103,8 @@ class BsAccordionItem extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
+    this.style.display = 'block';
+
     const title = this.getAttribute('title') || '';
     const expanded = this.hasAttribute('expanded');
     
@@ -99,31 +124,41 @@ class BsAccordionItem extends HTMLElement {
     const itemId = this.id || `accordion-item-${Math.random().toString(36).substr(2, 9)}`;
     const collapseId = `collapse-${itemId}`;
 
-    this.classList.add('accordion-item');
-
     // Capture children and clear innerHTML for the new structure
     const fragment = document.createDocumentFragment();
     while (this.firstChild) {
       fragment.appendChild(this.firstChild);
     }
 
-    this.innerHTML = `
-      <h2 class="accordion-header">
-        <button class="accordion-button ${expanded ? '' : 'collapsed'}" type="button" 
-                data-bs-toggle="collapse" data-bs-target="#${collapseId}" 
-                aria-expanded="${expanded}" aria-controls="${collapseId}">
-          ${title}
-        </button>
-      </h2>
-      <div id="${collapseId}" class="accordion-collapse collapse ${expanded ? 'show' : ''}" 
-           ${parentId ? `data-bs-parent="#${parentId}"` : ''}>
-        <div class="accordion-body">
+    const itemElement = document.createElement('div');
+    itemElement.className = 'accordion-item';
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      itemElement.className += ` ${hostClasses}`;
+    }
+
+    itemElement.innerHTML = `
+        <h2 class="accordion-header">
+          <button class="accordion-button ${expanded ? '' : 'collapsed'}" type="button" 
+                  data-bs-toggle="collapse" data-bs-target="#${collapseId}" 
+                  aria-expanded="${expanded}" aria-controls="${collapseId}">
+            ${title}
+          </button>
+        </h2>
+        <div id="${collapseId}" class="accordion-collapse collapse ${expanded ? 'show' : ''}" 
+             ${parentId ? `data-bs-parent="#${parentId}"` : ''}>
+          <div class="accordion-body">
+          </div>
         </div>
-      </div>
     `;
 
-    const bodyContainer = this.querySelector('.accordion-body');
-    const headerButton = this.querySelector('.accordion-button');
+    this.innerHTML = '';
+    this.appendChild(itemElement);
+
+    const bodyContainer = itemElement.querySelector('.accordion-body');
+    const headerButton = itemElement.querySelector('.accordion-button');
 
     // Distribute children to their respective slots
     Array.from(fragment.childNodes).forEach(child => {

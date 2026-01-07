@@ -5,7 +5,7 @@
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
  * Attributes:
- * - type: The contextual variant (e.g., 'primary', 'success', 'danger'). Default: 'primary'.
+ * - variant: The contextual variant (e.g., 'primary', 'success', 'danger'). Default: 'primary'.
  * - dismissible: Boolean attribute; if present, the alert will have a close button.
  * - fade: Boolean attribute; if present, the alert will fade out when dismissed.
  * - heading: The heading text for the alert.
@@ -41,20 +41,28 @@ class BsAlert extends HTMLElement {
     if (this._initialized) return;
     this._initialized = true;
 
-    const typeAttr = this.getAttribute('type') || 'primary';
+    const variantAttr = this.getAttribute('variant') || 'primary';
     const dismissible = this.hasAttribute('dismissible');
     const fade = this.hasAttribute('fade');
     const headingAttr = this.getAttribute('heading');
 
     this.style.display = 'block';
-    this.classList.add('alert', `alert-${typeAttr}`);
-    this.setAttribute('role', 'alert');
+
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert alert-${variantAttr}`;
+    alertElement.setAttribute('role', 'alert');
 
     if (dismissible) {
-      this.classList.add('alert-dismissible');
+      alertElement.classList.add('alert-dismissible');
     }
     if (fade) {
-      this.classList.add('fade', 'show');
+      alertElement.classList.add('fade', 'show');
+    }
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      alertElement.className += ` ${hostClasses}`;
     }
 
     // Capture children and clear innerHTML for the new structure
@@ -106,22 +114,23 @@ class BsAlert extends HTMLElement {
 
     // Clear and append in order
     this.innerHTML = '';
+    this.appendChild(alertElement);
     
     while (headingContainer.firstChild) {
-      this.appendChild(headingContainer.firstChild);
+      alertElement.appendChild(headingContainer.firstChild);
     }
     
     while (bodyContainer.firstChild) {
-      this.appendChild(bodyContainer.firstChild);
+      alertElement.appendChild(bodyContainer.firstChild);
     }
     
     while (dismissContainer.firstChild) {
-      this.appendChild(dismissContainer.firstChild);
+      alertElement.appendChild(dismissContainer.firstChild);
     }
 
     // Initialize Bootstrap Alert if available
     if (window.bootstrap && window.bootstrap.Alert) {
-      this.alert = new bootstrap.Alert(this);
+      this.alert = new bootstrap.Alert(alertElement);
     }
   }
 
@@ -150,7 +159,8 @@ class BsAlert extends HTMLElement {
       this._render();
     }
     if (!this.alert && window.bootstrap && window.bootstrap.Alert) {
-      this.alert = new bootstrap.Alert(this);
+      const alertEl = this.querySelector('.alert');
+      this.alert = new bootstrap.Alert(alertEl);
     }
   }
 }

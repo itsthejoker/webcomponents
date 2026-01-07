@@ -24,43 +24,70 @@
     <div class="example-row">
       <bs-spinner></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-spinner&gt;&lt;/bs-spinner&gt;
+    </bs-code-block>
   </section>
 
   <hr>
 
   <section>
     <h3>Growing Spinner</h3>
-    <p>Use the <code>variant="grow"</code> attribute for a growing spinner.</p>
+    <p>Use the <code>animation="grow"</code> attribute for a growing spinner.</p>
     <div class="example-row">
-      <bs-spinner variant="grow"></bs-spinner>
+      <bs-spinner animation="grow"></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-spinner animation="grow"&gt;&lt;/bs-spinner&gt;
+    </bs-code-block>
   </section>
 
   <hr>
 
   <section>
     <h3>Colors</h3>
-    <p>Use the <code>type</code> attribute to apply contextual colors.</p>
+    <p>Use the <code>variant</code> attribute to apply contextual colors.</p>
     <div class="example-row">
-      <bs-spinner type="primary"></bs-spinner>
-      <bs-spinner type="secondary"></bs-spinner>
-      <bs-spinner type="success"></bs-spinner>
-      <bs-spinner type="danger"></bs-spinner>
-      <bs-spinner type="warning"></bs-spinner>
-      <bs-spinner type="info"></bs-spinner>
-      <bs-spinner type="light"></bs-spinner>
-      <bs-spinner type="dark"></bs-spinner>
+      <bs-spinner variant="primary"></bs-spinner>
+      <bs-spinner variant="secondary"></bs-spinner>
+      <bs-spinner variant="success"></bs-spinner>
+      <bs-spinner variant="danger"></bs-spinner>
+      <bs-spinner variant="warning"></bs-spinner>
+      <bs-spinner variant="info"></bs-spinner>
+      <bs-spinner variant="light"></bs-spinner>
+      <bs-spinner variant="dark"></bs-spinner>
     </div>
     <div class="example-row mt-3">
-      <bs-spinner variant="grow" type="primary"></bs-spinner>
-      <bs-spinner variant="grow" type="secondary"></bs-spinner>
-      <bs-spinner variant="grow" type="success"></bs-spinner>
-      <bs-spinner variant="grow" type="danger"></bs-spinner>
-      <bs-spinner variant="grow" type="warning"></bs-spinner>
-      <bs-spinner variant="grow" type="info"></bs-spinner>
-      <bs-spinner variant="grow" type="light"></bs-spinner>
-      <bs-spinner variant="grow" type="dark"></bs-spinner>
+      <bs-spinner animation="grow" variant="primary"></bs-spinner>
+      <bs-spinner animation="grow" variant="secondary"></bs-spinner>
+      <bs-spinner animation="grow" variant="success"></bs-spinner>
+      <bs-spinner animation="grow" variant="danger"></bs-spinner>
+      <bs-spinner animation="grow" variant="warning"></bs-spinner>
+      <bs-spinner animation="grow" variant="info"></bs-spinner>
+      <bs-spinner animation="grow" variant="light"></bs-spinner>
+      <bs-spinner animation="grow" variant="dark"></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;!-- Border Spinners --&gt;
+&lt;bs-spinner variant="primary"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="secondary"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="success"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="danger"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="warning"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="info"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="light"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner variant="dark"&gt;&lt;/bs-spinner&gt;
+
+&lt;!-- Growing Spinners --&gt;
+&lt;bs-spinner animation="grow" variant="primary"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="secondary"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="success"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="danger"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="warning"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="info"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="light"&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" variant="dark"&gt;&lt;/bs-spinner&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -70,8 +97,12 @@
     <p>Use the <code>small</code> attribute for a smaller spinner.</p>
     <div class="example-row">
       <bs-spinner small></bs-spinner>
-      <bs-spinner variant="grow" small></bs-spinner>
+      <bs-spinner animation="grow" small></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-spinner small&gt;&lt;/bs-spinner&gt;
+&lt;bs-spinner animation="grow" small&gt;&lt;/bs-spinner&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -87,13 +118,29 @@
 
     <h5>Text Alignment</h5>
     <div class="text-center example-row">
-      <bs-spinner type="primary"></bs-spinner>
+      <bs-spinner variant="primary"></bs-spinner>
     </div>
 
     <h5>Floats</h5>
     <div class="clearfix example-row">
       <bs-spinner class="float-end"></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;!-- Flexbox --&gt;
+&lt;div class="d-flex justify-content-center"&gt;
+  &lt;bs-spinner&gt;&lt;/bs-spinner&gt;
+&lt;/div&gt;
+
+&lt;!-- Text Alignment --&gt;
+&lt;div class="text-center"&gt;
+  &lt;bs-spinner variant="primary"&gt;&lt;/bs-spinner&gt;
+&lt;/div&gt;
+
+&lt;!-- Floats --&gt;
+&lt;div class="clearfix"&gt;
+  &lt;bs-spinner class="float-end"&gt;&lt;/bs-spinner&gt;
+&lt;/div&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -111,6 +158,17 @@
         Loading...
       </button>
     </div>
+    <bs-code-block class="mt-2">
+&lt;button class="btn btn-primary" type="button" disabled&gt;
+  &lt;bs-spinner small label="Loading..." aria-hidden="true"&gt;&lt;/bs-spinner&gt;
+  &lt;span class="visually-hidden"&gt;Loading...&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;button class="btn btn-primary" type="button" disabled&gt;
+  &lt;bs-spinner small aria-hidden="true"&gt;&lt;/bs-spinner&gt;
+  Loading...
+&lt;/button&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -121,6 +179,9 @@
     <div class="example-row">
       <bs-spinner label="Please wait..."></bs-spinner>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-spinner label="Please wait..."&gt;&lt;/bs-spinner&gt;
+    </bs-code-block>
   </section>
 </div>
 
@@ -128,6 +189,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Spinner Component -->
 <script src="spinner.js"></script>
+<script src="../code_block/code_block.js"></script>
 
 </body>
 </html>

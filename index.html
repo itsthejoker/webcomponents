@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BS5 Web Components</title>
+  <!-- Load Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="components/main/main.js" async></script>
+  <style>
+    hr {
+      margin: 2rem 0;
+    }
+
+    /* Mandatory styles for main-container FOUC protection */
+    main-container {
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+<main-container class="d-lg-flex mx-auto">
+  <bs-permanent-sidebar title="Web Components!" expand="lg">
+    <bs-navbar-nav>
+      <bs-navbar-text><strong>Bootstrap Components</strong></bs-navbar-text>
+      <bs-navbar-link href="components/accordion/accordion_example.html">Accordion</bs-navbar-link>
+      <bs-navbar-link href="components/alert/alert_example.html">Alert</bs-navbar-link>
+      <bs-navbar-link href="components/badge/badge_example.html">Badge</bs-navbar-link>
+      <bs-navbar-link href="components/card/card_example.html">Card</bs-navbar-link>
+      <bs-navbar-link href="components/carousel/carousel_example.html">Carousel</bs-navbar-link>
+      <bs-navbar-link href="components/modal/modal_example.html">Modal</bs-navbar-link>
+      <bs-navbar-link href="components/nav_tabs/navs_example.html">Nav Tabs</bs-navbar-link>
+      <bs-navbar-link href="components/navbar/navbar_example.html">Navbar</bs-navbar-link>
+      <bs-navbar-link href="components/pagination/pagination_example.html">Pagination</bs-navbar-link>
+      <bs-navbar-link href="components/placeholder/placeholder_example.html">Placeholder</bs-navbar-link>
+      <bs-navbar-link href="components/sidebar/sidebar_example.html">Sidebar</bs-navbar-link>
+      <bs-navbar-link href="components/spinner/spinner_example.html">Spinner</bs-navbar-link>
+      <bs-navbar-link href="components/toast/toast_example.html">Toast</bs-navbar-link>
+      <bs-navbar-link href="components/tooltip/tooltip_example.html">Tooltip</bs-navbar-link>
+
+      <bs-navbar-text><strong>Custom Components</strong></bs-navbar-text>
+      <bs-navbar-link href="components/centered_column/centered_column_example.html">Centered Column</bs-navbar-link>
+      <bs-navbar-link href="components/code_block/code_block_example.html">Code Block</bs-navbar-link>
+      <bs-navbar-link href="components/loading_button/loading_button_example.html">Loading Button</bs-navbar-link>
+      <bs-navbar-link href="components/main/main_example.html">Main (FOUC Protector)</bs-navbar-link>
+      <bs-navbar-link href="components/theme_toggle/theme_toggle_example.html">Theme Toggle</bs-navbar-link>
+
+    </bs-navbar-nav>
+  </bs-permanent-sidebar>
+
+  <div class="container p-4 flex-grow-1" id="content">
+    <h1>Bootstrap 5 Web Components</h1>
+    <p class="lead">I like web components.</p>
+    <p>
+      Bootstrap is great, and I use it for pretty much everything. However, the fact that there's a lot of
+      copy-and-paste that happens with it means that it can be tedious to maintain and update. Also, it's
+      just sometimes a pain to read. This repo is a collection of web components that I've created to make
+      Bootstrap easier to use and faster to write. (This page is written using them--check the source!)
+    </p>
+
+    <centered-column class="col-12 col-lg-8 col-lg-6">
+      <bs-alert variant="warning">
+        <div role="heading" aria-level="3"><i class="bi bi-exclamation-diamond-fill"></i> <strong>Hey, you!</strong></div>
+        This is a collection of web components that I created to make my personal Bootstrap sites easier
+        to write quickly. It is <em>not</em> a complete and thorough implementation of Bootstrap's
+        functionality, nor will it likely ever be. You are welcome to use these components as you see fit,
+        but I make no guarantees that they will work for you. With that being said, contributions are
+        welcome and accepted!
+      </bs-alert>
+    </centered-column>
+
+    <section>
+      <div class="row">
+        <div class="col-12 col-lg-6">
+          <bs-card title="Bootstrap Components" class="shadow-sm my-3">
+            <p>
+              Every component that starts with <code>bs-</code> is a web component that wraps Bootstrap's
+              functionality for that component. Every component is stylable by passing classes into the
+              web component; the classes will be applied as expected to the Bootstrap component underneath.
+            </p>
+          </bs-card>
+        </div>
+        <div class="col-12 col-lg-6">
+          <bs-card title="Custom Components" class="shadow-sm my-3">
+            <p>
+              Any other component is a custom component that involves Bootstrap in some way, but also
+              includes additional functionality. These components include things like a button that
+              automatically handles its own loading spinner and a <code>main</code> element that
+              prevents the Flash of Unstyled Content (FOUC) common when using web components.
+            </p>
+          </bs-card>
+        </div>
+      </div>
+    </section>
+
+    <section id="usage">
+      <h3>Usage</h3>
+      <p>
+        Start by laying out your normal Bootstrap HTML structure, like this:
+      </p>
+      <bs-code-block>
+&lt;!doctype html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+    &lt;title>Bootstrap demo&lt;/title&gt;
+    &lt;link
+       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+       rel="stylesheet"
+       crossorigin="anonymous"&gt;
+  &lt;/head>
+  &lt;body&gt;
+    &lt;h1&gt;Hello, world!&lt;/h1&gt;
+    &lt;script
+       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+       crossorigin="anonymous"&gt;
+    &lt;/script&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+      </bs-code-block>
+      <p>
+        Once you have your basic template, copy the *.js files into your project that you want
+        and include them at the bottom of your html file. With the script tags in place, you can
+        use the web components in your html just like you would use Bootstrap's components.
+      </p>
+      <bs-code-block>
+&lt;body&gt;
+  &lt;!-- custom component alert! --&gt;
+  &lt;bs-alert variant="info"&gt;Hi, I'm an alert!&lt;/bs-alert&gt;
+  &lt;h1&gt;Hello, world!&lt;/h1&gt;
+  &lt;script
+     src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+     crossorigin="anonymous"&gt;
+  &lt;/script&gt;
+  &lt;!-- Here's the script that defines the custom element above --&gt;
+  &lt;script src="static/alert.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+      </bs-code-block>
+    </section>
+
+    <section id="fouc">
+      <h3>Flashes of Unstyled Content (FOUC)</h3>
+      <p>
+        One of the major pitfalls of web components (besides their relative verbosity) is that
+        they take time to load. The HTML content will load in, but the browser won't know what
+        to do with it until the web component is upgraded. This can cause a flash of unstyled
+        content (FOUC) when the page loads. To prevent this, you can use the <code>main-container</code>
+        component, which will prevent FOUC by preventing the page from rendering until all web
+        components are upgraded.
+      </p>
+      <p>
+        This provides a nice loading screen (that loads in first) for your users while the web
+        components load in. In practice, this takes very little time, but it hides the FOUC
+        from your users and feels pretty slick.
+      </p>
+      <bs-code-block>
+&lt;style&gt;
+/* Mandatory styles for main-container FOUC protection */
+main-container {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+&lt;/style&gt;
+
+&lt;!-- Note that the main.js script is loaded first --&gt;
+&lt;script src="static/main.js"&gt;&lt;/script&gt;
+&lt;main-container&gt;
+  &lt;bs-alert variant="info"&gt;Loading...&lt;/bs-alert&gt;
+  &lt;p&gt;Your content here.&lt;/p&gt;
+&lt;/main-container&gt;
+
+&lt;!-- Now that the main component has loaded, we can --&gt;
+&lt;!-- let it do its work while this loads --&gt;
+&lt;script src="static/alert.js"&gt;&lt;/script&gt;
+      </bs-code-block>
+      <bs-alert variant="info">
+        Note that the <code>main-container</code> component is loaded in above the content so
+        that it gives time for the other components to load and initialize.
+      </bs-alert>
+    </section>
+
+  </div>
+</main-container>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+<!-- Load Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Load our Web Components -->
+<script src="components/alert/alert.js" async></script>
+<script src="components/card/card.js" async></script>
+<script src="components/code_block/code_block.js" async></script>
+<script src="components/centered_column/centered_column.js" async></script>
+<script src="components/navbar/navbar.js" async></script>
+<script src="components/sidebar/sidebar.js" async></script>
+</body>
+</html>

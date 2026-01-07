@@ -1,129 +1,167 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>BsNavbar Web Component Demo</title>
-    <!-- Load Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-      body { padding-top: 70px; padding-bottom: 100px; }
-      hr { margin: 3rem 0; }
-      .example-container { max-width: 900px; margin: 0 auto; }
-      section { margin-bottom: 3rem; }
-    </style>
-  </head>
-  <body>
-    <!-- Fixed Top Navbar -->
-    <bs-navbar expand="lg" background="dark" theme="dark" placement="fixed-top">
-      <bs-navbar-brand href="#">Navbar Demo</bs-navbar-brand>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BsNavbar Web Component Demo</title>
+  <!-- Load Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body { padding-bottom: 50px; }
+    hr { margin: 2rem 0; }
+    .example-container { max-width: 800px; margin: 0 auto; }
+  </style>
+</head>
+<body>
+<div class="container mt-5 example-container">
+  <h1>BsNavbar Web Component Demo</h1>
+  <p class="lead">Examples of the <code>&lt;bs-navbar&gt;</code> and related custom elements.</p>
+
+  <section>
+    <h3>1. Basic Navbar</h3>
+    <p>A standard light-themed navbar with a brand, links, and a dropdown.</p>
+    <bs-navbar expand="lg" background="body-tertiary">
+      <bs-navbar-brand href="#">My Brand</bs-navbar-brand>
       <bs-navbar-nav class="me-auto">
-        <bs-nav-link href="#home" active>Home</bs-nav-link>
-        <bs-nav-link href="#features">Features</bs-nav-link>
-        <bs-nav-dropdown title="Dropdown">
-          <bs-dropdown-item href="#">Action</bs-dropdown-item>
-          <bs-dropdown-item href="#">Another action</bs-dropdown-item>
-          <bs-dropdown-divider></bs-dropdown-divider>
-          <bs-dropdown-item href="#">Something else</bs-dropdown-item>
-        </bs-nav-dropdown>
+        <bs-navbar-link href="#" active>Home</bs-navbar-link>
+        <bs-navbar-link href="#">Link</bs-navbar-link>
+        <bs-navbar-dropdown title="Dropdown">
+          <bs-navbar-dropdown-item href="#">Action</bs-navbar-dropdown-item>
+          <bs-navbar-dropdown-item href="#">Another action</bs-navbar-dropdown-item>
+          <bs-navbar-dropdown-divider></bs-navbar-dropdown-divider>
+          <bs-navbar-dropdown-item href="#">Something else here</bs-navbar-dropdown-item>
+        </bs-navbar-dropdown>
+        <bs-navbar-link href="#" disabled>Disabled</bs-navbar-link>
       </bs-navbar-nav>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
     </bs-navbar>
+    <bs-code-block class="mt-2">
+&lt;bs-navbar expand="lg" background="body-tertiary"&gt;
+  &lt;bs-navbar-brand href="#"&gt;My Brand&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav class="me-auto"&gt;
+    &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Link&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-dropdown title="Dropdown"&gt;
+      &lt;bs-navbar-dropdown-item href="#"&gt;Action&lt;/bs-navbar-dropdown-item&gt;
+      &lt;bs-navbar-dropdown-item href="#"&gt;Another action&lt;/bs-navbar-dropdown-item&gt;
+      &lt;bs-navbar-dropdown-divider&gt;&lt;/bs-navbar-dropdown-divider&gt;
+      &lt;bs-navbar-dropdown-item href="#"&gt;Something else here&lt;/bs-navbar-dropdown-item&gt;
+    &lt;/bs-navbar-dropdown&gt;
+    &lt;bs-navbar-link href="#" disabled&gt;Disabled&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-navbar&gt;
+    </bs-code-block>
+  </section>
 
-    <div class="container mt-5 example-container">
-      <h1>BsNavbar Web Component Demo</h1>
-      <p class="lead">Examples of the <code>&lt;bs-navbar&gt;</code> and related custom elements.</p>
-      
-      <section>
-        <h3>1. Basic Navbar</h3>
-        <p>A standard light-themed navbar with a brand, links, and a dropdown.</p>
-        <bs-navbar expand="lg" background="body-tertiary">
-          <bs-navbar-brand href="#">My Brand</bs-navbar-brand>
-          <bs-navbar-nav class="me-auto">
-            <bs-nav-link href="#" active>Home</bs-nav-link>
-            <bs-nav-link href="#">Link</bs-nav-link>
-            <bs-nav-dropdown title="Dropdown">
-              <bs-dropdown-item href="#">Action</bs-dropdown-item>
-              <bs-dropdown-item href="#">Another action</bs-dropdown-item>
-              <bs-dropdown-divider></bs-dropdown-divider>
-              <bs-dropdown-item href="#">Something else here</bs-dropdown-item>
-            </bs-nav-dropdown>
-            <bs-nav-link href="#" disabled>Disabled</bs-nav-link>
-          </bs-navbar-nav>
-        </bs-navbar>
-      </section>
+  <hr>
 
-      <hr>
+  <section>
+    <h3>2. Color Schemes</h3>
+    <p>Using <code>background="primary"</code> and <code>theme="dark"</code>.</p>
+    <bs-navbar expand="lg" background="primary" theme="dark">
+      <bs-navbar-brand href="#">Blue Navbar</bs-navbar-brand>
+      <bs-navbar-nav>
+        <bs-navbar-link href="#" active>Home</bs-navbar-link>
+        <bs-navbar-link href="#">Features</bs-navbar-link>
+        <bs-navbar-link href="#">Pricing</bs-navbar-link>
+      </bs-navbar-nav>
+    </bs-navbar>
+    <bs-code-block class="mt-2">
+&lt;bs-navbar expand="lg" background="primary" theme="dark"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Blue Navbar&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav&gt;
+    &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Features&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Pricing&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-navbar&gt;
+    </bs-code-block>
+  </section>
 
-      <section>
-        <h3>2. Color Schemes</h3>
-        <p>Using <code>background="primary"</code> and <code>theme="dark"</code>.</p>
-        <bs-navbar expand="lg" background="primary" theme="dark">
-          <bs-navbar-brand href="#">Blue Navbar</bs-navbar-brand>
-          <bs-navbar-nav>
-            <bs-nav-link href="#" active>Home</bs-nav-link>
-            <bs-nav-link href="#">Features</bs-nav-link>
-            <bs-nav-link href="#">Pricing</bs-nav-link>
-          </bs-navbar-nav>
-        </bs-navbar>
-      </section>
+  <hr>
 
-      <hr>
+  <section>
+    <h3>3. Brand with Image</h3>
+    <p>Brands can contain complex HTML like images.</p>
+    <bs-navbar expand="lg" background="body-tertiary">
+      <bs-navbar-brand href="#">
+        <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24"
+             class="d-inline-block align-text-top">
+        Bootstrap
+      </bs-navbar-brand>
+    </bs-navbar>
+    <bs-code-block class="mt-2">
+&lt;bs-navbar expand="lg" background="body-tertiary"&gt;
+  &lt;bs-navbar-brand href="#"&gt;
+    &lt;img src="path/to/logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top"&gt;
+    Bootstrap
+  &lt;/bs-navbar-brand&gt;
+&lt;/bs-navbar&gt;
+    </bs-code-block>
+  </section>
 
-      <section>
-        <h3>3. Brand with Image</h3>
-        <p>Brands can contain complex HTML like images.</p>
-        <bs-navbar expand="lg" background="body-tertiary">
-          <bs-navbar-brand href="#">
-            <img src="https://getbootstrap.com/docs/5.3/assets/brand/bootstrap-logo.svg" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-            Bootstrap
-          </bs-navbar-brand>
-        </bs-navbar>
-      </section>
+  <hr>
 
-      <hr>
+  <section>
+    <h3>4. Always Collapsed with Scroll</h3>
+    <p>Using <code>expand="none"</code> and <code>scroll</code> on <code>&lt;bs-navbar-nav&gt;</code>.</p>
+    <bs-navbar expand="none" background="body-tertiary">
+      <bs-navbar-brand href="#">Scroll Demo</bs-navbar-brand>
+      <bs-navbar-nav scroll scroll-height="100px">
+        <bs-navbar-link href="#">Item 1</bs-navbar-link>
+        <bs-navbar-link href="#">Item 2</bs-navbar-link>
+        <bs-navbar-link href="#">Item 3</bs-navbar-link>
+        <bs-navbar-link href="#">Item 4</bs-navbar-link>
+        <bs-navbar-link href="#">Item 5</bs-navbar-link>
+        <bs-navbar-link href="#">Item 6</bs-navbar-link>
+      </bs-navbar-nav>
+    </bs-navbar>
+    <bs-code-block class="mt-2">
+&lt;bs-navbar expand="none" background="body-tertiary"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Scroll Demo&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav scroll scroll-height="100px"&gt;
+    &lt;bs-navbar-link href="#"&gt;Item 1&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Item 2&lt;/bs-navbar-link&gt;
+    &lt;!-- ... --&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-navbar&gt;
+    </bs-code-block>
+  </section>
 
-      <section>
-        <h3>4. Always Collapsed with Scroll</h3>
-        <p>Using <code>expand="none"</code> and <code>scroll</code> on <code>&lt;bs-navbar-nav&gt;</code>.</p>
-        <bs-navbar expand="none" background="body-tertiary">
-          <bs-navbar-brand href="#">Scroll Demo</bs-navbar-brand>
-          <bs-navbar-nav scroll scroll-height="100px">
-            <bs-nav-link href="#">Item 1</bs-nav-link>
-            <bs-nav-link href="#">Item 2</bs-nav-link>
-            <bs-nav-link href="#">Item 3</bs-nav-link>
-            <bs-nav-link href="#">Item 4</bs-nav-link>
-            <bs-nav-link href="#">Item 5</bs-nav-link>
-            <bs-nav-link href="#">Item 6</bs-nav-link>
-          </bs-navbar-nav>
-        </bs-navbar>
-      </section>
+  <hr>
 
-      <hr>
+  <section>
+    <h3>5. Text and Search</h3>
+    <p>Mixing links, text, and forms.</p>
+    <bs-navbar expand="lg" background="body-tertiary">
+      <bs-navbar-brand href="#">Navbar w/ Text</bs-navbar-brand>
+      <bs-navbar-nav class="me-auto">
+        <bs-navbar-link href="#" active>Home</bs-navbar-link>
+        <bs-navbar-link href="#">Features</bs-navbar-link>
+      </bs-navbar-nav>
+      <bs-navbar-text class="me-2">
+        Signed in as: <a href="#">Mark Otto</a>
+      </bs-navbar-text>
+    </bs-navbar>
+    <bs-code-block class="mt-2">
+&lt;bs-navbar expand="lg" background="body-tertiary"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Navbar w/ Text&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav class="me-auto"&gt;
+    &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Features&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+  &lt;bs-navbar-text class="me-2"&gt;
+    Signed in as: &lt;a href="#"&gt;Mark Otto&lt;/a&gt;
+  &lt;/bs-navbar-text&gt;
+&lt;/bs-navbar&gt;
+    </bs-code-block>
+  </section>
 
-      <section>
-        <h3>5. Text and Search</h3>
-        <p>Mixing links, text, and forms.</p>
-        <bs-navbar expand="lg" background="body-tertiary">
-          <bs-navbar-brand href="#">Navbar w/ Text</bs-navbar-brand>
-          <bs-navbar-nav class="me-auto">
-            <bs-nav-link href="#" active>Home</bs-nav-link>
-            <bs-nav-link href="#">Features</bs-nav-link>
-          </bs-navbar-nav>
-          <bs-navbar-text class="me-2">
-            Signed in as: <a href="#">Mark Otto</a>
-          </bs-navbar-text>
-        </bs-navbar>
-      </section>
+</div>
 
-    </div>
-
-    <!-- Load Bootstrap JS Bundle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Load our Web Component -->
-    <script src="navbar.js"></script>
-  </body>
+<!-- Load Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Load our Web Component -->
+<script src="navbar.js"></script>
+<script src="../code_block/code_block.js"></script>
+</body>
 </html>

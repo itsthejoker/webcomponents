@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>BsSidebar Web Component Demo</title>
+    <!-- Load Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+      body { padding-bottom: 50px; }
+      hr { margin: 2rem 0; }
+      .example-container { max-width: 800px; margin: 0 auto; }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 example-container">
+      <h1>BsSidebar Web Component Demo</h1>
+      <p class="lead">Examples of the <code>&lt;bs-sidebar&gt;</code> component, which provides a responsive offcanvas navigation sidebar.</p>
+
+      <section>
+        <h3>1. Basic Sidebar Navbar</h3>
+        <p>A simple sidebar that remains an offcanvas drawer at all breakpoints.</p>
+        <bs-sidebar title="Sidebar Title" background="body-tertiary">
+          <bs-navbar-brand href="#">Brand</bs-navbar-brand>
+          <bs-navbar-nav>
+            <bs-navbar-link href="#" active>Home</bs-navbar-link>
+            <bs-navbar-link href="#">Features</bs-navbar-link>
+            <bs-navbar-link href="#">Pricing</bs-navbar-link>
+          </bs-navbar-nav>
+        </bs-sidebar>
+        <bs-code-block class="mt-2">
+&lt;bs-sidebar title="Sidebar Title" background="body-tertiary"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Brand&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav&gt;
+    &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Features&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Pricing&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-sidebar&gt;
+        </bs-code-block>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>2. Responsive Sidebar</h3>
+        <p>This sidebar expands into a horizontal navbar at the <code>lg</code> breakpoint. Below <code>lg</code>, it behaves as an offcanvas drawer.</p>
+        <bs-sidebar title="Menu" expand="lg" background="light">
+          <bs-navbar-brand href="#">Responsive Brand</bs-navbar-brand>
+          <bs-navbar-nav>
+            <bs-navbar-link href="#" active>Home</bs-navbar-link>
+            <bs-navbar-link href="#">About</bs-navbar-link>
+            <bs-navbar-link href="#">Contact</bs-navbar-link>
+          </bs-navbar-nav>
+        </bs-sidebar>
+        <bs-code-block class="mt-2">
+&lt;bs-sidebar title="Menu" expand="lg" background="light"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Responsive Brand&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav&gt;
+    &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;About&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Contact&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-sidebar&gt;
+        </bs-code-block>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>3. Dark Theme and Custom Placement</h3>
+        <p>Using <code>theme="dark"</code>, <code>background="dark"</code>, and <code>placement="end"</code>.</p>
+        <bs-sidebar title="User Profile" background="dark" theme="dark" placement="end">
+          <bs-navbar-brand href="#">Settings</bs-navbar-brand>
+          <bs-navbar-nav>
+            <bs-navbar-link href="#">Profile</bs-navbar-link>
+            <bs-navbar-link href="#">Account</bs-navbar-link>
+            <bs-navbar-link href="#">Logout</bs-navbar-link>
+          </bs-navbar-nav>
+        </bs-sidebar>
+        <bs-code-block class="mt-2">
+&lt;bs-sidebar title="User Profile" background="dark" theme="dark" placement="end"&gt;
+  &lt;bs-navbar-brand href="#"&gt;Settings&lt;/bs-navbar-brand&gt;
+  &lt;bs-navbar-nav&gt;
+    &lt;bs-navbar-link href="#"&gt;Profile&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Account&lt;/bs-navbar-link&gt;
+    &lt;bs-navbar-link href="#"&gt;Logout&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-sidebar&gt;
+        </bs-code-block>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>4. Custom Header Slot</h3>
+        <p>You can use a <code>slot="title"</code> to provide custom HTML for the sidebar header.</p>
+        <bs-sidebar background="info" theme="dark">
+          <div slot="title">
+            <i class="bi bi-gear-fill me-2"></i> Custom Header
+          </div>
+          <bs-navbar-brand href="#">Logo</bs-navbar-brand>
+          <p class="mt-3">This is some custom content inside the sidebar body.</p>
+          <bs-navbar-nav>
+            <bs-navbar-link href="#">Dashboard</bs-navbar-link>
+          </bs-navbar-nav>
+        </bs-sidebar>
+        <bs-code-block class="mt-2">
+&lt;bs-sidebar background="info" theme="dark"&gt;
+  &lt;div slot="title"&gt;
+    &lt;i class="bi bi-gear-fill me-2"&gt;&lt;/i&gt; Custom Header
+  &lt;/div&gt;
+  &lt;bs-navbar-brand href="#"&gt;Logo&lt;/bs-navbar-brand&gt;
+  &lt;p class="mt-3"&gt;This is some custom content inside the sidebar body.&lt;/p&gt;
+  &lt;bs-navbar-nav&gt;
+    &lt;bs-navbar-link href="#"&gt;Dashboard&lt;/bs-navbar-link&gt;
+  &lt;/bs-navbar-nav&gt;
+&lt;/bs-sidebar&gt;
+        </bs-code-block>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>5. Permanent Sidebar (Responsive)</h3>
+        <p>A sidebar that is visible on desktop (<code>md</code> and up) but collapses into an offcanvas drawer on mobile, with a toggle button at the top.</p>
+        <div class="d-md-flex border rounded overflow-hidden" style="min-height: 280px;">
+          <bs-permanent-sidebar title="Admin" width="230px" background="body-tertiary">
+            <bs-navbar-nav>
+              <bs-navbar-link href="#" active>
+                <i class="bi bi-speedometer2 me-2"></i> Dashboard
+              </bs-navbar-link>
+              <bs-navbar-link href="#">
+                <i class="bi bi-table me-2"></i> Orders
+              </bs-navbar-link>
+              <bs-navbar-link href="#">
+                <i class="bi bi-grid me-2"></i> Products
+              </bs-navbar-link>
+              <bs-navbar-link href="#">
+                <i class="bi bi-people me-2"></i> Customers
+              </bs-navbar-link>
+            </bs-navbar-nav>
+            <div class="mt-auto border-top pt-3 w-100">
+               <bs-navbar-link href="#">
+                 <i class="bi bi-box-arrow-right me-2"></i> Sign out
+               </bs-navbar-link>
+            </div>
+          </bs-permanent-sidebar>
+          <div class="p-4 flex-grow-1 bg-white">
+            <h5>Dashboard Content</h5>
+            <p>The permanent sidebar is displayed alongside the main content. It doesn't collapse into an offcanvas drawer and uses a fixed width.</p>
+            <p>You can use <code>bs-navbar-nav</code> and other components inside it just like with the responsive sidebar.</p>
+          </div>
+        </div>
+        <bs-code-block class="mt-2">
+&lt;div class="d-md-flex border rounded overflow-hidden" style="min-height: 280px;"&gt;
+  &lt;bs-permanent-sidebar title="Admin" width="230px" background="body-tertiary"&gt;
+    &lt;bs-navbar-nav&gt;
+      &lt;bs-navbar-link href="#" active&gt;
+        &lt;i class="bi bi-speedometer2 me-2"&gt;&lt;/i&gt; Dashboard
+      &lt;/bs-navbar-link&gt;
+      &lt;bs-navbar-link href="#"&gt;
+        &lt;i class="bi bi-table me-2"&gt;&lt;/i&gt; Orders
+      &lt;/bs-navbar-link&gt;
+      &lt;bs-navbar-link href="#"&gt;
+        &lt;i class="bi bi-grid me-2"&gt;&lt;/i&gt; Products
+      &lt;/bs-navbar-link&gt;
+      &lt;bs-navbar-link href="#"&gt;
+        &lt;i class="bi bi-people me-2"&gt;&lt;/i&gt; Customers
+      &lt;/bs-navbar-link&gt;
+    &lt;/bs-navbar-nav&gt;
+    &lt;div class="mt-auto border-top pt-3 w-100"&gt;
+       &lt;bs-navbar-link href="#"&gt;
+         &lt;i class="bi bi-box-arrow-right me-2"&gt;&lt;/i&gt; Sign out
+       &lt;/bs-navbar-link&gt;
+    &lt;/div&gt;
+  &lt;/bs-permanent-sidebar&gt;
+  &lt;div class="p-4 flex-grow-1 bg-white"&gt;
+    &lt;!-- Content --&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </bs-code-block>
+      </section>
+
+      <hr>
+
+      <section>
+        <h3>6. Dark Permanent Sidebar</h3>
+        <p>Using <code>theme="dark"</code> and <code>background="dark"</code>. Collapses on screens smaller than <code>md</code>.</p>
+        <div class="d-md-flex border rounded overflow-hidden" style="min-height: 300px;">
+          <bs-permanent-sidebar width="200px" background="dark" theme="dark">
+             <bs-navbar-brand href="#">
+               <i class="bi bi-bootstrap-fill me-2 text-primary"></i> App
+             </bs-navbar-brand>
+             <bs-navbar-nav>
+               <bs-navbar-link href="#" active>Home</bs-navbar-link>
+               <bs-navbar-link href="#">Settings</bs-navbar-link>
+             </bs-navbar-nav>
+          </bs-permanent-sidebar>
+          <div class="p-4 flex-grow-1 bg-dark-subtle">
+            <p>Main content with a dark themed sidebar.</p>
+          </div>
+        </div>
+        <bs-code-block class="mt-2">
+&lt;div class="d-md-flex border rounded overflow-hidden" style="min-height: 300px;"&gt;
+  &lt;bs-permanent-sidebar width="200px" background="dark" theme="dark"&gt;
+     &lt;bs-navbar-brand href="#"&gt;
+       &lt;i class="bi bi-bootstrap-fill me-2 text-primary"&gt;&lt;/i&gt; App
+     &lt;/bs-navbar-brand&gt;
+     &lt;bs-navbar-nav&gt;
+       &lt;bs-navbar-link href="#" active&gt;Home&lt;/bs-navbar-link&gt;
+       &lt;bs-navbar-link href="#"&gt;Settings&lt;/bs-navbar-link&gt;
+     &lt;/bs-navbar-nav&gt;
+  &lt;/bs-permanent-sidebar&gt;
+  &lt;div class="p-4 flex-grow-1 bg-dark-subtle"&gt;
+    &lt;p&gt;Main content with a dark themed sidebar.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+        </bs-code-block>
+      </section>
+
+    </div>
+
+    <!-- Bootstrap Icons for example 4 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- Load Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Load our Web Components -->
+    <script src="../navbar/navbar.js"></script>
+    <script src="sidebar.js"></script>
+    <script src="../code_block/code_block.js"></script>
+  </body>
+</html>

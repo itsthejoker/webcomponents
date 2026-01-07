@@ -32,6 +32,11 @@
         <button class="btn btn-secondary">Hover me</button>
       </bs-tooltip>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-tooltip title="Default tooltip"&gt;
+  &lt;button class="btn btn-secondary"&gt;Hover me&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -53,6 +58,23 @@
         <button class="btn btn-secondary">Tooltip on left</button>
       </bs-tooltip>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-tooltip title="Tooltip on top" placement="top"&gt;
+  &lt;button class="btn btn-secondary"&gt;Tooltip on top&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+
+&lt;bs-tooltip title="Tooltip on right" placement="right"&gt;
+  &lt;button class="btn btn-secondary"&gt;Tooltip on right&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+
+&lt;bs-tooltip title="Tooltip on bottom" placement="bottom"&gt;
+  &lt;button class="btn btn-secondary"&gt;Tooltip on bottom&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+
+&lt;bs-tooltip title="Tooltip on left" placement="left"&gt;
+  &lt;button class="btn btn-secondary"&gt;Tooltip on left&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -65,6 +87,11 @@
         <button class="btn btn-secondary">Tooltip with HTML</button>
       </bs-tooltip>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-tooltip title="&lt;em&gt;Tooltip&lt;/em&gt; &lt;u&gt;with&lt;/u&gt; &lt;b&gt;HTML&lt;/b&gt;" html placement="right"&gt;
+  &lt;button class="btn btn-secondary"&gt;Tooltip with HTML&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -77,6 +104,18 @@
         <button class="btn btn-primary">Custom themed tooltip</button>
       </bs-tooltip>
     </div>
+    <bs-code-block class="mt-2">
+&lt;style&gt;
+  .custom-tooltip {
+    --bs-tooltip-bg: var(--bs-primary);
+    --bs-tooltip-color: var(--bs-white);
+  }
+&lt;/style&gt;
+
+&lt;bs-tooltip title="This tooltip is themed via CSS variables." custom-class="custom-tooltip"&gt;
+  &lt;button class="btn btn-primary"&gt;Custom themed tooltip&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -95,6 +134,15 @@
         <button class="btn btn-sm btn-danger" onclick="BsTooltip.disposeAll(document.getElementById('dynamic-container'))">Dispose These</button>
       </div>
     </div>
+    <bs-code-block class="mt-2">
+&lt;div id="dynamic-container"&gt;
+  &lt;button class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Standard tooltip 1"&gt;Standard Tooltip 1&lt;/button&gt;
+  &lt;button class="btn btn-outline-primary" data-bs-toggle="tooltip" title="Standard tooltip 2"&gt;Standard Tooltip 2&lt;/button&gt;
+  
+  &lt;button onclick="BsTooltip.initAll(document.getElementById('dynamic-container'))"&gt;Initialize&lt;/button&gt;
+  &lt;button onclick="BsTooltip.disposeAll(document.getElementById('dynamic-container'))"&gt;Dispose&lt;/button&gt;
+&lt;/div&gt;
+    </bs-code-block>
 
     <h5 class="mt-4">2. Re-initialization</h5>
     <p>Change attributes and call <code>reinit()</code> or use the static <code>BsTooltip.reinit(el)</code>.</p>
@@ -106,6 +154,20 @@
         <button class="btn btn-sm btn-secondary" onclick="updateAndReinit()">Change to "New Title" & Bottom</button>
       </div>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-tooltip id="reinit-example" title="Initial Title" placement="top"&gt;
+  &lt;button class="btn btn-warning"&gt;Change &amp; Re-init&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+
+&lt;script&gt;
+  function updateAndReinit() {
+    const el = document.getElementById('reinit-example');
+    el.setAttribute('data-bs-title', 'New Re-initialized Title!');
+    el.setAttribute('placement', 'bottom');
+    el.reinit();
+  }
+&lt;/script&gt;
+    </bs-code-block>
   </section>
 
   <hr>
@@ -123,6 +185,15 @@
         <button class="btn btn-sm btn-outline-info" onclick="document.getElementById('manual-tooltip').toggle()">Toggle</button>
       </div>
     </div>
+    <bs-code-block class="mt-2">
+&lt;bs-tooltip id="manual-tooltip" title="Manually triggered" trigger="manual"&gt;
+  &lt;button class="btn btn-info text-white"&gt;I am manual&lt;/button&gt;
+&lt;/bs-tooltip&gt;
+
+&lt;button onclick="document.getElementById('manual-tooltip').show()"&gt;Show&lt;/button&gt;
+&lt;button onclick="document.getElementById('manual-tooltip').hide()"&gt;Hide&lt;/button&gt;
+&lt;button onclick="document.getElementById('manual-tooltip').toggle()"&gt;Toggle&lt;/button&gt;
+    </bs-code-block>
   </section>
 </div>
 
@@ -140,6 +211,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Tooltip Component -->
 <script src="tooltip.js"></script>
+<script src="../code_block/code_block.js"></script>
 
 </body>
 </html>

@@ -8,7 +8,7 @@
  * - col: Grid column width (1-12).
  * - width: Custom width (e.g., '75%', '100px').
  * - size: Sizing modifier ('lg', 'sm', 'xs').
- * - color: Theme color ('primary', 'success', etc.).
+ * - variant: Theme color ('primary', 'success', etc.).
  * - animation: Animation style ('glow', 'wave'). Note: animation is typically 
  *              applied to a parent element, so this component will wrap its 
  *              internal placeholder in a div with the animation class if provided.
@@ -38,40 +38,50 @@ class BsPlaceholder extends HTMLElement {
     const col = this.getAttribute('col');
     const width = this.getAttribute('width');
     const size = this.getAttribute('size');
-    const color = this.getAttribute('color');
+    const variant = this.getAttribute('variant');
     const animation = this.getAttribute('animation');
+    const hostClasses = this.getAttribute('class');
 
-    // To support animation on the component itself, we might need a wrapper
-    // if we want to follow Bootstrap's pattern.
-    // If animation is provided, we wrap the placeholder span in an animation div.
-    
-    let target = this;
-    if (animation) {
-      this.classList.add(`placeholder-${animation}`);
-      // When animation is present, we create an internal span to be the actual placeholder
-      const span = document.createElement('span');
-      span.innerHTML = '&nbsp;';
-      this.appendChild(span);
-      target = span;
-    } else {
-      this.innerHTML = '&nbsp;';
+    // To avoid the host collapsing when children use percentage widths,
+    // we apply the width-related classes and styles to the host itself.
+    this.style.display = 'inline-block';
+    if (col) {
+      this.classList.add(`col-${col}`);
     }
-
-    target.classList.add('placeholder');
-    if (col) target.classList.add(`col-${col}`);
-    if (size) target.classList.add(`placeholder-${size}`);
-    if (color) target.classList.add(`bg-${color}`);
-    
     if (width) {
-      target.style.width = width;
+      this.style.width = width;
     }
+
+    // To support animation on the component itself, we follow Bootstrap's pattern.
+    const wrapper = document.createElement('div');
+    if (animation) {
+      wrapper.className = `placeholder-${animation}`;
+    }
+
+    // Pass through classes from the host element to the underlying wrapper
+    // per guidelines, but filter out width-related classes that we want 
+    // to keep on the host for proper layout.
+    if (hostClasses) {
+      const filtered = hostClasses.split(' ').filter(c => !c.startsWith('col-') && !c.startsWith('w-')).join(' ');
+      if (filtered) {
+        wrapper.className += ` ${filtered}`;
+      }
+    }
+
+    const span = document.createElement('span');
+    span.innerHTML = '&nbsp;';
+    span.classList.add('placeholder');
     
-    // Ensure display is correct
-    if (!animation) {
-        this.style.display = 'inline-block';
-    } else {
-        this.style.display = 'block';
-    }
+    // The inner span should always fill its container (the host/wrapper)
+    // to ensure the placeholder is visible and respects the layout.
+    span.style.width = '100%';
+
+    if (size) span.classList.add(`placeholder-${size}`);
+    if (variant) span.classList.add(`bg-${variant}`);
+    
+    wrapper.appendChild(span);
+    this.innerHTML = '';
+    this.appendChild(wrapper);
   }
 
   /**
@@ -81,12 +91,12 @@ class BsPlaceholder extends HTMLElement {
    * @param {HTMLElement} element - The container element to placeholderize.
    * @param {Object} options - Options for placeholder generation.
    * @param {string} options.animation - 'glow' or 'wave'.
-   * @param {string} options.color - Bootstrap theme color.
+   * @param {string} options.variant - Bootstrap theme color.
    * @param {boolean} options.preserveHeight - Whether to try and preserve height (using &nbsp;).
    */
   static placeholderize(element, options = {}) {
     const animation = options.animation || 'glow';
-    const color = options.color || '';
+    const variant = options.variant || '';
     
     // Find common text-containing elements and images
     const targets = element.querySelectorAll('h1, h2, h3, h4, h5, h6, p, a, button, .btn, span:not(.placeholder), img');
@@ -139,7 +149,7 @@ class BsPlaceholder extends HTMLElement {
         target.classList.add('disabled');
         target.setAttribute('aria-disabled', 'true');
         if (target.tagName === 'BUTTON') target.disabled = true;
-        if (color) target.classList.add(`bg-${color}`);
+        if (variant) target.classList.add(`bg-${variant}`);
         target.style.width = `${rect.width}px`;
       } else {
         // Create a placeholder that matches the original width
@@ -147,7 +157,7 @@ class BsPlaceholder extends HTMLElement {
         ph.className = 'placeholder';
         ph.style.width = `${rect.width}px`;
         ph.innerHTML = '&nbsp;';
-        if (color) ph.classList.add(`bg-${color}`);
+        if (variant) ph.classList.add(`bg-${variant}`);
         target.appendChild(ph);
       }
     });

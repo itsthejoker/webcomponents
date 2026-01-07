@@ -9,10 +9,11 @@
     <style>
       body { padding-bottom: 50px; }
       hr { margin: 2rem 0; }
+      .example-container { max-width: 800px; margin: 0 auto; }
     </style>
   </head>
   <body>
-    <div class="container mt-5">
+    <div class="container mt-5 example-container">
       <h1>BsModal Web Component Demo</h1>
       <p class="lead">Examples of the <code>&lt;bs-modal&gt;</code> custom element.</p>
       
@@ -30,6 +31,19 @@
             <button type="button" class="btn btn-primary" onclick="alert('Saved!')">Save changes</button>
           </div>
         </bs-modal>
+        <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-primary" onclick="document.getElementById('basicModal').show()"&gt;
+  Launch basic modal
+&lt;/button&gt;
+
+&lt;bs-modal id="basicModal" title="Basic Modal"&gt;
+  &lt;p&gt;This is a basic modal using the &lt;code&gt;&amp;lt;bs-modal&amp;gt;&lt;/code&gt; web component. It automatically wraps the content in a &lt;code&gt;.modal-body&lt;/code&gt;.&lt;/p&gt;
+  &lt;div slot="footer"&gt;
+    &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+    &lt;button type="button" class="btn btn-primary" onclick="alert('Saved!')"&gt;Save changes&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/bs-modal&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -54,6 +68,25 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </bs-modal>
+        <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-secondary" onclick="document.getElementById('largeModal').show()"&gt;
+  Launch large scrollable modal
+&lt;/button&gt;
+
+&lt;bs-modal id="largeModal" size="lg" scrollable centered&gt;
+  &lt;span slot="title" class="text-primary"&gt;&lt;i class="bi bi-info-circle"&gt;&lt;/i&gt; Custom Header Element&lt;/span&gt;
+  &lt;div slot="body"&gt;
+    &lt;p&gt;This modal is large, vertically centered, and has scrollable content.&lt;/p&gt;
+    &lt;div style="height: 600px; background: #f8f9fa; border: 1px dashed #dee2e6; display: flex; align-items: center; justify-content: center;"&gt;
+      &lt;p class="text-muted"&gt;Lots of scrollable content here...&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;p class="mt-3"&gt;End of content.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div slot="footer"&gt;
+    &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/bs-modal&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -71,6 +104,18 @@
             <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Understood</button>
           </div>
         </bs-modal>
+        <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-warning" onclick="document.getElementById('staticModal').show()"&gt;
+  Launch static backdrop modal
+&lt;/button&gt;
+
+&lt;bs-modal id="staticModal" title="Static Backdrop" backdrop="static" keyboard="false"&gt;
+  &lt;p&gt;I will not close if you click outside of me. Don't even try to press the escape key.&lt;/p&gt;
+  &lt;div slot="footer"&gt;
+    &lt;button type="button" class="btn btn-primary" data-bs-dismiss="modal"&gt;Understood&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/bs-modal&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -88,6 +133,18 @@
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </bs-modal>
+        <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-info" onclick="document.getElementById('fullModal').show()"&gt;
+  Launch fullscreen modal
+&lt;/button&gt;
+
+&lt;bs-modal id="fullModal" title="Fullscreen Modal" fullscreen="true"&gt;
+  &lt;p&gt;This modal covers the entire viewport.&lt;/p&gt;
+  &lt;div slot="footer"&gt;
+    &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Close&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/bs-modal&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -114,12 +171,36 @@
             }, 2000);
           });
         </script>
+        <bs-code-block class="mt-2">
+&lt;button type="button" class="btn btn-dark" id="btnToggle"&gt;
+  Start Auto-Toggle Loop
+&lt;/button&gt;
+
+&lt;bs-modal id="toggleModal" title="Auto-Toggle Modal"&gt;
+  &lt;p&gt;This modal is being controlled via JavaScript methods.&lt;/p&gt;
+&lt;/bs-modal&gt;
+
+&lt;script&gt;
+  document.getElementById('btnToggle').addEventListener('click', () =&gt; {
+    const modal = document.getElementById('toggleModal');
+    let count = 0;
+    const interval = setInterval(() =&gt; {
+      modal.toggle();
+      count++;
+      if (count &gt;= 6) clearInterval(interval);
+    }, 2000);
+  });
+&lt;/script&gt;
+        </bs-code-block>
       </section>
     </div>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <!-- Load Bootstrap JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Load our Web Component -->
     <script src="modal.js"></script>
+    <script src="../code_block/code_block.js"></script>
   </body>
 </html>

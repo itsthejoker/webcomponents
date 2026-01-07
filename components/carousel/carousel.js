@@ -73,9 +73,19 @@ class BsCarousel extends HTMLElement {
     const touch = this.getAttribute('touch');
     const wrap = this.getAttribute('wrap');
 
-    this.classList.add('carousel', 'slide');
-    if (isFade) this.classList.add('carousel-fade');
-    if (isDark) this.classList.add('carousel-dark');
+    this.style.display = 'block';
+
+    const carouselElement = document.createElement('div');
+    carouselElement.id = this.id;
+    carouselElement.className = 'carousel slide';
+    if (isFade) carouselElement.classList.add('carousel-fade');
+    if (isDark) carouselElement.classList.add('carousel-dark');
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      carouselElement.className += ` ${hostClasses}`;
+    }
 
     // Capture children
     const fragment = document.createDocumentFragment();
@@ -84,7 +94,10 @@ class BsCarousel extends HTMLElement {
     }
 
     // Prepare structure
-    this.innerHTML = `
+    this.innerHTML = '';
+    this.appendChild(carouselElement);
+
+    carouselElement.innerHTML = `
       <div class="carousel-indicators"></div>
       <div class="carousel-inner"></div>
       <button class="carousel-control-prev" type="button" data-bs-target="#${this.id}" data-bs-slide="prev">
@@ -97,10 +110,10 @@ class BsCarousel extends HTMLElement {
       </button>
     `;
 
-    const indicatorsContainer = this.querySelector('.carousel-indicators');
-    const innerContainer = this.querySelector('.carousel-inner');
-    const prevControl = this.querySelector('.carousel-control-prev');
-    const nextControl = this.querySelector('.carousel-control-next');
+    const indicatorsContainer = carouselElement.querySelector('.carousel-indicators');
+    const innerContainer = carouselElement.querySelector('.carousel-inner');
+    const prevControl = carouselElement.querySelector('.carousel-control-prev');
+    const nextControl = carouselElement.querySelector('.carousel-control-next');
 
     // Distribute items and count them for indicators
     const items = Array.from(fragment.childNodes).filter(node => 
@@ -144,7 +157,7 @@ class BsCarousel extends HTMLElement {
       if (touch !== null) options.touch = touch !== 'false';
       if (wrap !== null) options.wrap = wrap !== 'false';
 
-      this.carousel = new bootstrap.Carousel(this, options);
+      this.carousel = new bootstrap.Carousel(carouselElement, options);
     }
   }
 
@@ -163,7 +176,8 @@ class BsCarousel extends HTMLElement {
   _ensureCarousel() {
     if (!this._initialized) this._render();
     if (!this.carousel && window.bootstrap && window.bootstrap.Carousel) {
-      this.carousel = bootstrap.Carousel.getOrCreateInstance(this);
+      const carouselEl = this.querySelector('.carousel');
+      this.carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
     }
     return !!this.carousel;
   }
@@ -193,12 +207,6 @@ class BsCarouselItem extends HTMLElement {
   connectedCallback() {
     if (this._initialized) return;
     
-    // Set standard classes immediately if possible
-    this.classList.add('carousel-item');
-    if (this.hasAttribute('active')) {
-      this.classList.add('active');
-    }
-
     setTimeout(() => {
       this._render();
     }, 0);
@@ -213,9 +221,20 @@ class BsCarouselItem extends HTMLElement {
     const intervalAttr = this.getAttribute('interval');
     const captionTitleAttr = this.getAttribute('caption-title');
     const captionTextAttr = this.getAttribute('caption-text');
+    const active = this.hasAttribute('active');
+
+    const itemElement = document.createElement('div');
+    itemElement.className = 'carousel-item';
+    if (active) itemElement.classList.add('active');
 
     if (intervalAttr) {
-      this.setAttribute('data-bs-interval', intervalAttr);
+      itemElement.setAttribute('data-bs-interval', intervalAttr);
+    }
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      itemElement.className += ` ${hostClasses}`;
     }
 
     // Capture children
@@ -224,13 +243,16 @@ class BsCarouselItem extends HTMLElement {
       fragment.appendChild(this.firstChild);
     }
 
-    this.innerHTML = `
+    this.innerHTML = '';
+    this.appendChild(itemElement);
+
+    itemElement.innerHTML = `
       <div class="carousel-item-content"></div>
       <div class="carousel-caption d-none d-md-block"></div>
     `;
 
-    const contentContainer = this.querySelector('.carousel-item-content');
-    const captionContainer = this.querySelector('.carousel-caption');
+    const contentContainer = itemElement.querySelector('.carousel-item-content');
+    const captionContainer = itemElement.querySelector('.carousel-caption');
 
     if (imgAttr) {
       const img = document.createElement('img');
@@ -273,7 +295,7 @@ class BsCarouselItem extends HTMLElement {
     
     // Flatten content container if it only contains the image or children
     while (contentContainer.firstChild) {
-        this.insertBefore(contentContainer.firstChild, captionContainer.parentElement ? captionContainer : null);
+        itemElement.insertBefore(contentContainer.firstChild, captionContainer.parentElement ? captionContainer : null);
     }
     contentContainer.remove();
   }

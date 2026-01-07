@@ -30,11 +30,11 @@
 
       <section>
         <h3>2. Width and Color</h3>
-        <p>Uses <code>width</code> for custom sizing and <code>color</code> for theme variants.</p>
-        <bs-placeholder width="25%" color="primary"></bs-placeholder>
-        <bs-placeholder width="50%" color="success"></bs-placeholder>
-        <bs-placeholder width="75%" color="danger"></bs-placeholder>
-        <bs-placeholder width="100%" color="warning"></bs-placeholder>
+        <p>Uses <code>width</code> for custom sizing and <code>variant</code> for theme variants.</p>
+        <bs-placeholder width="25%" variant="primary"></bs-placeholder>
+        <bs-placeholder width="50%" variant="success"></bs-placeholder>
+        <bs-placeholder width="75%" variant="danger"></bs-placeholder>
+        <bs-placeholder width="100%" variant="warning"></bs-placeholder>
       </section>
 
       <hr>
@@ -75,7 +75,7 @@
           <button type="button" class="btn btn-outline-primary" onclick="BsPlaceholder.placeholderize(document.getElementById('demo-card'))">
             Placeholderize (Glow)
           </button>
-          <button type="button" class="btn btn-outline-primary" onclick="BsPlaceholder.placeholderize(document.getElementById('demo-card'), { animation: 'wave', color: 'secondary' })">
+          <button type="button" class="btn btn-outline-primary" onclick="BsPlaceholder.placeholderize(document.getElementById('demo-card'), { animation: 'wave', variant: 'secondary' })">
             Placeholderize (Wave + Secondary)
           </button>
           <button type="button" class="btn btn-outline-secondary" onclick="BsPlaceholder.restore(document.getElementById('demo-card'))">
@@ -102,7 +102,7 @@
               <bs-placeholder col="6" animation="glow"></bs-placeholder>
               <bs-placeholder col="8" animation="glow"></bs-placeholder>
             </p>
-            <bs-placeholder col="6" size="lg" color="primary" animation="glow" style="display: block; height: 38px;"></bs-placeholder>
+            <bs-placeholder col="6" size="lg" variant="primary" animation="glow" style="display: block; height: 38px;"></bs-placeholder>
           </div>
         </div>
       </section>

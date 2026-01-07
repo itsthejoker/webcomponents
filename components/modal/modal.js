@@ -65,15 +65,22 @@ class BsModal extends HTMLElement {
     const scrollable = this.hasAttribute('scrollable');
     const fullscreen = this.getAttribute('fullscreen');
 
-    // Configure the custom element itself as the .modal container
-    this.classList.add('modal');
+    // Create the internal modal container
+    const modalElement = document.createElement('div');
+    modalElement.className = 'modal';
     if (fade) {
-      this.classList.add('fade');
+      modalElement.classList.add('fade');
     }
-    this.setAttribute('tabindex', '-1');
-    this.setAttribute('aria-hidden', 'true');
-    this.setAttribute('data-bs-backdrop', backdrop);
-    this.setAttribute('data-bs-keyboard', keyboard);
+    modalElement.setAttribute('tabindex', '-1');
+    modalElement.setAttribute('aria-hidden', 'true');
+    modalElement.setAttribute('data-bs-backdrop', backdrop);
+    modalElement.setAttribute('data-bs-keyboard', keyboard);
+
+    // Pass through classes from the host element to the underlying div
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      modalElement.className += ` ${hostClasses}`;
+    }
 
     const sizeClass = size ? `modal-${size}` : '';
     const centeredClass = centered ? 'modal-dialog-centered' : '';
@@ -92,7 +99,10 @@ class BsModal extends HTMLElement {
       fragment.appendChild(this.firstChild);
     }
 
-    this.innerHTML = `
+    this.innerHTML = '';
+    this.appendChild(modalElement);
+
+    modalElement.innerHTML = `
       <div class="modal-dialog ${centeredClass} ${scrollableClass} ${sizeClass} ${fullscreenClass}">
         <div class="modal-content">
           <div class="modal-header">
@@ -105,9 +115,9 @@ class BsModal extends HTMLElement {
       </div>
     `;
 
-    const bodyContainer = this.querySelector('.modal-body');
-    const footerContainer = this.querySelector('.modal-footer');
-    const titleContainer = this.querySelector('.modal-title');
+    const bodyContainer = modalElement.querySelector('.modal-body');
+    const footerContainer = modalElement.querySelector('.modal-footer');
+    const titleContainer = modalElement.querySelector('.modal-title');
 
     // Distribute children to their respective slots
     Array.from(fragment.childNodes).forEach(child => {
@@ -136,7 +146,7 @@ class BsModal extends HTMLElement {
 
     // Initialize Bootstrap Modal if the bootstrap object is available globally
     if (window.bootstrap && window.bootstrap.Modal) {
-      this.modal = new bootstrap.Modal(this);
+      this.modal = new bootstrap.Modal(modalElement);
     }
   }
 
@@ -193,7 +203,8 @@ class BsModal extends HTMLElement {
       this._render();
     }
     if (!this.modal && window.bootstrap && window.bootstrap.Modal) {
-      this.modal = new bootstrap.Modal(this);
+      const modalEl = this.querySelector('.modal');
+      this.modal = new bootstrap.Modal(modalEl);
     }
   }
 }

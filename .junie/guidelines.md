@@ -28,6 +28,8 @@ There is no build step or package manager required. The components are provided 
 1.  **No Shadow DOM**: These components **must not** use Shadow DOM. This ensures they can inherit global Bootstrap styles and interact correctly with Bootstrap's JavaScript plugins.
 2.  **Deferred Rendering**: Most components use `setTimeout(() => { this._render(); }, 0)` in their `connectedCallback`. This is a critical pattern used to ensure that the browser has fully parsed the custom element's children before the `_render` method attempts to manipulate them.
 3.  **Bootstrap Plugin Wrapping**: Components often serve as wrappers for Bootstrap's JS plugins (e.g., `bootstrap.Modal`, `bootstrap.Collapse`). They should handle the initialization and disposal of these plugins in `connectedCallback`/`_render` and `disconnectedCallback`.
+4.  **Attribute vs Slot**: Components typically support both attributes for simple text (e.g., `title="My Modal"`) and slots for complex HTML content (e.g., `<div slot="title">...</div>`). Slots are simulated by manually moving children during the `_render` phase since Shadow DOM is not used.
+5.  **Idempotency**: Components should be idempotent, meaning they should behave the same way regardless of how many times they are connected or disconnected. This is crucial for seamless integration with frameworks that may disconnect and reconnect components frequently.
 
 ### Code Style & Patterns
 
@@ -35,6 +37,7 @@ There is no build step or package manager required. The components are provided 
 -   **Attribute vs Slot**: Components typically support both attributes for simple text (e.g., `title="My Modal"`) and slots for complex HTML content (e.g., `<div slot="title">...</div>`). Slots are simulated by manually moving children during the `_render` phase since Shadow DOM is not used.
 -   **Idempotency**: `_render` methods should check for an `_initialized` flag to prevent multiple renders if `connectedCallback` is triggered more than once.
 -   **Cleanup**: Always implement `disconnectedCallback` to call `.dispose()` on any underlying Bootstrap plugin instances to prevent memory leaks.
+-   **Encapsulation**: Bootstrap CSS expects that components are a `div`, so every custom component should wrap its content in a `<div>`. Copy any classes / attributes from the original element to the wrapper.
 
 ### Debugging
 -   Check the browser console for any errors related to `bootstrap` being undefined.

@@ -26,6 +26,13 @@
           <bs-carousel-item img="https://placehold.co/800x400/666/fff?text=Second+Slide" alt="Second Slide"></bs-carousel-item>
           <bs-carousel-item img="https://placehold.co/800x400/555/fff?text=Third+Slide" alt="Third Slide"></bs-carousel-item>
         </bs-carousel>
+        <bs-code-block class="mt-2">
+&lt;bs-carousel indicators controls&gt;
+  &lt;bs-carousel-item active img="https://placehold.co/800x400/777/fff?text=First+Slide" alt="First Slide"&gt;&lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item img="https://placehold.co/800x400/666/fff?text=Second+Slide" alt="Second Slide"&gt;&lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item img="https://placehold.co/800x400/555/fff?text=Third+Slide" alt="Third Slide"&gt;&lt;/bs-carousel-item&gt;
+&lt;/bs-carousel&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -41,6 +48,16 @@
                             caption-title="Second slide label" 
                             caption-text="Some representative placeholder content for the second slide."></bs-carousel-item>
         </bs-carousel>
+        <bs-code-block class="mt-2">
+&lt;bs-carousel indicators controls&gt;
+  &lt;bs-carousel-item active img="https://placehold.co/800x400/007bff/fff?text=Slide+1" 
+                    caption-title="First slide label" 
+                    caption-text="Some representative placeholder content for the first slide."&gt;&lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item img="https://placehold.co/800x400/6c757d/fff?text=Slide+2" 
+                    caption-title="Second slide label" 
+                    caption-text="Some representative placeholder content for the second slide."&gt;&lt;/bs-carousel-item&gt;
+&lt;/bs-carousel&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -54,6 +71,14 @@
                             caption-text="Controls and indicators are dark on this carousel."></bs-carousel-item>
           <bs-carousel-item img="https://placehold.co/800x400/e9ecef/333?text=Light+Slide+2"></bs-carousel-item>
         </bs-carousel>
+        <bs-code-block class="mt-2">
+&lt;bs-carousel fade dark indicators controls&gt;
+  &lt;bs-carousel-item active img="https://placehold.co/800x400/f8f9fa/333?text=Light+Slide+1" 
+                    caption-title="Dark variant" 
+                    caption-text="Controls and indicators are dark on this carousel."&gt;&lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item img="https://placehold.co/800x400/e9ecef/333?text=Light+Slide+2"&gt;&lt;/bs-carousel-item&gt;
+&lt;/bs-carousel&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -71,6 +96,18 @@
           </bs-carousel-item>
           <bs-carousel-item img="https://placehold.co/800x400/dc3545/fff?text=Simple+Slide"></bs-carousel-item>
         </bs-carousel>
+        <bs-code-block class="mt-2">
+&lt;bs-carousel controls&gt;
+  &lt;bs-carousel-item active img="https://placehold.co/800x400/28a745/fff?text=Custom+Caption"&gt;
+    &lt;div slot="caption"&gt;
+      &lt;h3 class="text-warning"&gt;Warning Heading&lt;/h3&gt;
+      &lt;p&gt;This caption uses a slot for custom HTML structure.&lt;/p&gt;
+      &lt;button class="btn btn-sm btn-outline-light"&gt;Action Button&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item img="https://placehold.co/800x400/dc3545/fff?text=Simple+Slide"&gt;&lt;/bs-carousel-item&gt;
+&lt;/bs-carousel&gt;
+        </bs-code-block>
       </section>
 
       <hr>
@@ -86,6 +123,16 @@
                             caption-title="Short Duration" 
                             caption-text="This slide will only stay for 2 seconds."></bs-carousel-item>
         </bs-carousel>
+        <bs-code-block class="mt-2">
+&lt;bs-carousel ride="carousel" indicators controls&gt;
+  &lt;bs-carousel-item active interval="10000" img="https://placehold.co/800x400/343a40/fff?text=10+Seconds" 
+                    caption-title="Long Duration" 
+                    caption-text="This slide will stay for 10 seconds."&gt;&lt;/bs-carousel-item&gt;
+  &lt;bs-carousel-item interval="2000" img="https://placehold.co/800x400/495057/fff?text=2+Seconds" 
+                    caption-title="Short Duration" 
+                    caption-text="This slide will only stay for 2 seconds."&gt;&lt;/bs-carousel-item&gt;
+&lt;/bs-carousel&gt;
+        </bs-code-block>
       </section>
 
     </div>
@@ -94,5 +141,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Load our Web Component -->
     <script src="carousel.js"></script>
+    <script src="../code_block/code_block.js"></script>
   </body>
 </html>

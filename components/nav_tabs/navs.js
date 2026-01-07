@@ -53,6 +53,12 @@ class BsTabs extends HTMLElement {
       container.classList.add('d-flex', 'align-items-start');
     }
 
+    // Pass through classes from the host element to the underlying container
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      container.className += ` ${hostClasses}`;
+    }
+
     const nav = document.createElement('div');
     nav.className = `nav nav-${variant}`;
     if (isVertical) {
@@ -115,14 +121,9 @@ class BsTabs extends HTMLElement {
       content.appendChild(pane);
     });
 
-    if (isVertical) {
-      container.appendChild(nav);
-      container.appendChild(content);
-      this.appendChild(container);
-    } else {
-      this.appendChild(nav);
-      this.appendChild(content);
-    }
+    container.appendChild(nav);
+    container.appendChild(content);
+    this.appendChild(container);
   }
 }
 

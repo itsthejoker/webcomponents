@@ -44,6 +44,12 @@ class BsPagination extends HTMLElement {
     const nav = document.createElement('nav');
     nav.setAttribute('aria-label', ariaLabel);
 
+    // Pass through classes from the host element to the underlying nav
+    const hostClasses = this.getAttribute('class');
+    if (hostClasses) {
+      nav.className += ` ${hostClasses}`;
+    }
+
     const ul = document.createElement('ul');
     ul.className = 'pagination';
     
