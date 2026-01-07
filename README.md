@@ -4,35 +4,30 @@ Web components that wrap Bootstrap 5 functionality in custom elements. All compo
 
 ## Documentation
 
-A comprehensive documentation page is available in `index.html` that includes:
-
-- **Live demos** of all components
-- **Interactive navigation** with smooth scrolling
-- **Theme toggle** for light/dark mode
-- **Responsive design** for all screen sizes
+A comprehensive documentation page is available in `index.html`.
 
 Open `index.html` in your browser or deploy to GitHub Pages.
 
-## 📦 Available Components
+## Available Components
 
-| Component | Custom Element | Description |
-|-----------|----------------|-------------|
-| Accordion | `<bs-accordion>` & `<bs-accordion-item>` | Expandable content panels |
-| Alert | `<bs-alert>` | Contextual feedback messages |
-| Badge | `<bs-badge>` | Small count and labeling component |
-| Card | `<bs-card>` | Flexible content container |
-| Carousel | `<bs-carousel>` & `<bs-carousel-item>` | Slideshow component |
-| Loading Button | `<loading-button>` | Button with loading state |
-| Modal | `<bs-modal>` | Dialog boxes |
-| Nav Tabs | `<bs-tabs>` & `<bs-tab>` | Tabbed navigation |
-| Navbar | `<bs-navbar>`, `<bs-navbar-brand>`, etc. | Navigation header |
-| Pagination | `<bs-pagination>` & `<bs-pagination-item>` | Page navigation |
-| Placeholder | `<bs-placeholder>` | Content loading placeholder |
-| Sidebar | `<bs-sidebar>` & `<bs-permanent-sidebar>` | Offcanvas and permanent sidebars |
-| Spinner | `<bs-spinner>` | Loading indicator |
-| Theme Toggle | `<theme-toggle>` | Light/dark mode switcher |
-| Toast | `<bs-toast>` | Push notifications |
-| Tooltip | `<bs-tooltip>` | Hover information |
+| Component      | Custom Element                             | Description                        |
+|----------------|--------------------------------------------|------------------------------------|
+| Accordion      | `<bs-accordion>` & `<bs-accordion-item>`   | Expandable content panels          |
+| Alert          | `<bs-alert>`                               | Contextual feedback messages       |
+| Badge          | `<bs-badge>`                               | Small count and labeling component |
+| Card           | `<bs-card>`                                | Flexible content container         |
+| Carousel       | `<bs-carousel>` & `<bs-carousel-item>`     | Slideshow component                |
+| Loading Button | `<loading-button>`                         | Button with loading state          |
+| Modal          | `<bs-modal>`                               | Dialog boxes                       |
+| Nav Tabs       | `<bs-tabs>` & `<bs-tab>`                   | Tabbed navigation                  |
+| Navbar         | `<bs-navbar>`, `<bs-navbar-brand>`, etc.   | Navigation header                  |
+| Pagination     | `<bs-pagination>` & `<bs-pagination-item>` | Page navigation                    |
+| Placeholder    | `<bs-placeholder>`                         | Content loading placeholder        |
+| Sidebar        | `<bs-sidebar>` & `<bs-permanent-sidebar>`  | Offcanvas and permanent sidebars   |
+| Spinner        | `<bs-spinner>`                             | Loading indicator                  |
+| Theme Toggle   | `<theme-toggle>`                           | Light/dark mode switcher           |
+| Toast          | `<bs-toast>`                               | Push notifications                 |
+| Tooltip        | `<bs-tooltip>`                             | Hover information                  |
 
 ## Usage
 
