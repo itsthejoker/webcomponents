@@ -250,7 +250,7 @@ class BsPermanentSidebar extends HTMLElement {
 
     // Offcanvas Structure
     const offcanvas = document.createElement('div');
-    offcanvas.className = `offcanvas-${expandAttr} offcanvas-start`;
+    offcanvas.className = `offcanvas-${expandAttr} offcanvas-start h-100`;
     offcanvas.id = offcanvasId;
     offcanvas.setAttribute('tabindex', '-1');
     offcanvas.setAttribute('aria-labelledby', `${offcanvasId}Label`);
@@ -276,11 +276,11 @@ class BsPermanentSidebar extends HTMLElement {
     offcanvas.appendChild(offcanvasHeader);
 
     const offcanvasBody = document.createElement('div');
-    offcanvasBody.className = 'offcanvas-body p-0';
+    offcanvasBody.className = 'offcanvas-body p-0 d-flex flex-column';
     offcanvas.appendChild(offcanvasBody);
 
     const container = document.createElement('div');
-    container.className = `navbar d-flex flex-column flex-shrink-0 p-3 bg-${background} vh-100 align-items-stretch`.trim();
+    container.className = `navbar d-flex flex-column flex-nowrap flex-shrink-0 p-3 bg-${background} flex-grow-1 align-items-stretch`.trim();
     if (navbarPlacement) {
       container.classList.add(navbarPlacement);
     }
