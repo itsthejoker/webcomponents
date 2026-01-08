@@ -5,28 +5,21 @@
  * the Bootstrap Modal JavaScript plugin. It does not use Shadow DOM to ensure
  * full compatibility with Bootstrap's global CSS and existing JavaScript.
  *
- * Attributes:
- * - title: The title of the modal (displayed in the header).
- * - fade: Whether to use the fade animation (default: true).
- * - backdrop: The backdrop option: 'true' (default), 'false', or 'static'.
- * - keyboard: Whether the modal can be closed with the escape key: 'true' (default) or 'false'.
- * - size: The size of the modal: 'sm', 'lg', 'xl'.
- * - centered: Boolean attribute; if present, the modal will be vertically centered.
- * - scrollable: Boolean attribute; if present, the modal body will be scrollable.
- * - fullscreen: Boolean or breakpoint: 'true', 'sm', 'md', 'lg', 'xl', 'xxl'.
+ * @element bs-modal
  *
- * Slots (simulated via slot attribute):
- * - title: Custom title element (overrides the title attribute).
- * - body: Content for the modal body.
- * - footer: Content for the modal footer.
- * - (default): Any content without a slot attribute is placed in the modal body.
+ * @attribute {string} [title] - The title of the modal (displayed in the header).
+ * @attribute {boolean} [fade=true] - Whether to use the fade animation.
+ * @attribute {string} [backdrop='true'] - The backdrop option: 'true', 'false', or 'static'.
+ * @attribute {string} [keyboard='true'] - Whether the modal can be closed with the escape key: 'true' or 'false'.
+ * @attribute {string} [size] - The size of the modal: 'sm', 'lg', 'xl'.
+ * @attribute {boolean} [centered] - If present, the modal will be vertically centered.
+ * @attribute {boolean} [scrollable] - If present, the modal body will be scrollable.
+ * @attribute {string} [fullscreen] - Boolean or breakpoint: 'true', 'sm', 'md', 'lg', 'xl', 'xxl'.
  *
- * Methods:
- * - show(): Shows the modal.
- * - hide(): Hides the modal.
- * - toggle(): Toggles the modal.
- * - handleUpdate(): Readjusts the modal's position.
- * - dispose(): Destroys the modal instance.
+ * @slot title - Custom title element (overrides the title attribute).
+ * @slot body - Content for the modal body.
+ * @slot footer - Content for the modal footer.
+ * @slot - Default slot for content (placed in the modal body).
  */
 class BsModal extends HTMLElement {
   constructor() {

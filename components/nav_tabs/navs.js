@@ -1,18 +1,18 @@
 /**
  * A custom web component for Bootstrap tabs.
  *
- * This component acts as a container for <bs-tab> elements.
+ * This component acts as a container for `<bs-tab>` elements.
  * It coordinates the creation of the tab navigation and the tab content panes.
  *
- * Attributes:
- * - variant: The nav variant: 'tabs' (default), 'pills', 'underline'.
- * - vertical: Boolean attribute; if present, displays tabs vertically.
- * - fill: Boolean attribute; if present, fills the available width.
- * - justified: Boolean attribute; if present, creates equal-width tabs.
- * - fade: Boolean attribute; if present, uses fade animation for tab transitions.
+ * @element bs-tabs
  *
- * Slots:
- * - (default): Content containing <bs-tab> elements.
+ * @attribute {string} [variant='tabs'] - The nav variant: 'tabs', 'pills', 'underline'.
+ * @attribute {boolean} [vertical] - If present, displays tabs vertically.
+ * @attribute {boolean} [fill] - If present, fills the available width.
+ * @attribute {boolean} [justified] - If present, creates equal-width tabs.
+ * @attribute {boolean} [fade] - If present, uses fade animation for tab transitions.
+ *
+ * @slot - Default slot for `<bs-tab>` elements.
  */
 class BsTabs extends HTMLElement {
   constructor() {
@@ -130,16 +130,16 @@ class BsTabs extends HTMLElement {
 /**
  * A custom web component for a Bootstrap tab item.
  *
- * This component acts as a data holder for <bs-tabs>.
+ * This component acts as a data holder for `<bs-tabs>`.
  *
- * Attributes:
- * - title: The title text for the tab trigger.
- * - active: Boolean attribute; if present, this tab is active by default.
- * - disabled: Boolean attribute; if present, this tab is disabled.
+ * @element bs-tab
  *
- * Slots:
- * - header: Custom element for the tab trigger (overrides title attribute).
- * - (default): Content for the tab pane.
+ * @attribute {string} [title] - The title text for the tab trigger.
+ * @attribute {boolean} [active] - If present, this tab is active by default.
+ * @attribute {boolean} [disabled] - If present, this tab is disabled.
+ *
+ * @slot header - Custom element for the tab trigger (overrides title attribute).
+ * @slot - Default slot for content (placed in the tab pane).
  */
 class BsTab extends HTMLElement {
   // BsTab is mostly a data container, BsTabs does the rendering.

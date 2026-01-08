@@ -4,12 +4,12 @@
  * This component wraps the standard Bootstrap navbar structure and automatically
  * handles the responsive toggler and collapse functionality.
  *
- * Attributes:
- * - expand: The breakpoint at which the navbar expands: 'sm', 'md', 'lg' (default), 'xl', 'xxl', or 'always' (for .navbar-expand).
- * - background: The background color class (without 'bg-'): 'body-tertiary' (default), 'primary', 'dark', etc.
- * - theme: The color theme: 'light' or 'dark' (sets data-bs-theme).
- * - container: The container type: 'fluid' (default), 'sm', 'md', 'lg', 'xl', 'xxl', or 'standard' (for .container).
- * - placement: The placement of the navbar: 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'.
+ * @element bs-navbar
+ * @attribute {string} [expand='lg'] - The breakpoint at which the navbar expands: 'sm', 'md', 'lg', 'xl', 'xxl', or 'always'.
+ * @attribute {string} [background='body-tertiary'] - The background color class (without 'bg-'): 'body-tertiary', 'primary', 'dark', etc.
+ * @attribute {string} [theme] - The color theme: 'light' or 'dark' (sets data-bs-theme).
+ * @attribute {string} [container='fluid'] - The container type: 'fluid', 'sm', 'md', 'lg', 'xl', 'xxl', or 'standard'.
+ * @attribute {string} [placement] - The placement of the navbar: 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'.
  */
 class BsNavbar extends HTMLElement {
   constructor() {
@@ -104,8 +104,8 @@ class BsNavbar extends HTMLElement {
 /**
  * A custom web component for the Bootstrap navbar brand.
  *
- * Attributes:
- * - href: If provided, the brand will be rendered as an <a> tag.
+ * @element bs-navbar-brand
+ * @attribute {string} [href] - If provided, the brand will be rendered as an <a> tag.
  */
 class BsNavbarBrand extends HTMLElement {
   constructor() {
@@ -141,9 +141,9 @@ class BsNavbarBrand extends HTMLElement {
 /**
  * A custom web component for the Bootstrap navbar-nav container.
  *
- * Attributes:
- * - scroll: Boolean attribute; if present, enables vertical scrolling in the collapsed navbar.
- * - scroll-height: The maximum height for the scrollable area (sets --bs-scroll-height).
+ * @element bs-navbar-nav
+ * @attribute {boolean} [scroll] - If present, enables vertical scrolling in the collapsed navbar.
+ * @attribute {string} [scroll-height] - The maximum height for the scrollable area (sets --bs-scroll-height).
  */
 class BsNavbarNav extends HTMLElement {
   constructor() {
@@ -187,10 +187,10 @@ class BsNavbarNav extends HTMLElement {
 /**
  * A custom web component for a link within the navbar.
  *
- * Attributes:
- * - href: The URL the link points to.
- * - active: Boolean attribute; if present, the link is displayed as active.
- * - disabled: Boolean attribute; if present, the link is displayed as disabled.
+ * @element bs-navbar-link
+ * @attribute {string} [href='#'] - The URL the link points to.
+ * @attribute {boolean} [active] - If present, the link is displayed as active.
+ * @attribute {boolean} [disabled] - If present, the link is displayed as disabled.
  */
 class BsNavbarLink extends HTMLElement {
   constructor() {
@@ -236,9 +236,10 @@ class BsNavbarLink extends HTMLElement {
 /**
  * A custom web component for a dropdown menu within the navbar.
  *
- * Attributes:
- * - title: The text for the dropdown toggle.
- * - active: Boolean attribute; if present, the dropdown is displayed as active.
+ * @element bs-navbar-dropdown
+ * @attribute {string} [title] - The text for the dropdown toggle.
+ * @attribute {boolean} [active] - If present, the dropdown is displayed as active.
+ * @slot title - Custom HTML for the dropdown toggle.
  */
 class BsNavbarDropdown extends HTMLElement {
   constructor() {
@@ -316,10 +317,10 @@ class BsNavbarDropdown extends HTMLElement {
 /**
  * A custom web component for an item within a navbar dropdown.
  *
- * Attributes:
- * - href: The URL the item points to.
- * - active: Boolean attribute; if present, the item is displayed as active.
- * - disabled: Boolean attribute; if present, the item is displayed as disabled.
+ * @element bs-navbar-dropdown-item
+ * @attribute {string} [href='#'] - The URL the item points to.
+ * @attribute {boolean} [active] - If present, the item is displayed as active.
+ * @attribute {boolean} [disabled] - If present, the item is displayed as disabled.
  */
 class BsNavbarDropdownItem extends HTMLElement {
   constructor() {
@@ -360,6 +361,8 @@ class BsNavbarDropdownItem extends HTMLElement {
 
 /**
  * A custom web component for a divider within a navbar dropdown.
+ *
+ * @element bs-navbar-dropdown-divider
  */
 class BsNavbarDropdownDivider extends HTMLElement {
   constructor() {
@@ -383,6 +386,8 @@ class BsNavbarDropdownDivider extends HTMLElement {
 
 /**
  * A custom web component for plain text within a navbar.
+ *
+ * @element bs-navbar-text
  */
 class BsNavbarText extends HTMLElement {
   constructor() {

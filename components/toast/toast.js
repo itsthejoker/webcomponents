@@ -4,19 +4,18 @@
  * This component wraps the standard Bootstrap toast structure. It does not use
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - title: The title text for the toast header.
- * - time: The time/subtitle text for the toast header.
- * - autohide: Boolean attribute (default: true). Set to "false" to disable.
- * - delay: Delay in milliseconds before hiding the toast (default: 5000).
- * - animation: Boolean attribute (default: true). Set to "false" to disable.
- * - variant: Contextual variant for color schemes (e.g., 'primary', 'success').
- * - show: Boolean attribute; if present, the toast will be shown immediately.
+ * @element bs-toast
+ * @attribute {string} [title] - The title text for the toast header.
+ * @attribute {string} [time] - The time/subtitle text for the toast header.
+ * @attribute {boolean} [autohide=true] - Set to "false" to disable.
+ * @attribute {number} [delay=5000] - Delay in milliseconds before hiding the toast.
+ * @attribute {boolean} [animation=true] - Set to "false" to disable.
+ * @attribute {string} [variant] - Contextual variant for color schemes (e.g., 'primary', 'success').
+ * @attribute {boolean} [show] - If present, the toast will be shown immediately.
  *
- * Slots:
- * - icon: Custom icon/image for the header.
- * - header: Custom header content (overrides title and time attributes).
- * - (default): Content for the toast body.
+ * @slot icon - Custom icon/image for the header.
+ * @slot header - Custom header content (overrides title and time attributes).
+ * @slot - Content for the toast body.
  */
 class BsToast extends HTMLElement {
   constructor() {

@@ -3,15 +3,15 @@
  *
  * This component wraps the Bootstrap navbar with offcanvas functionality.
  *
- * Attributes:
- * - expand: The breakpoint at which the navbar expands: 'sm', 'md', 'lg', 'xl', 'xxl', or 'always'.
- *           Above this breakpoint, the sidebar content is shown as a regular navbar.
- * - background: The background color class (without 'bg-'): 'body-tertiary' (default), 'primary', 'dark', etc.
- * - theme: The color theme: 'light' or 'dark' (sets data-bs-theme).
- * - placement: The placement of the offcanvas: 'start' (left, default), 'end' (right), 'top', 'bottom'.
- * - navbar-placement: The placement of the navbar itself: 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'.
- * - container: The container type inside the navbar: 'fluid' (default), 'sm', 'md', 'lg', 'xl', 'xxl', or 'standard'.
- * - title: The title shown in the offcanvas header.
+ * @element bs-sidebar
+ * @attribute {string} [expand] - The breakpoint at which the navbar expands: 'sm', 'md', 'lg', 'xl', 'xxl', or 'always'.
+ * @attribute {string} [background='body-tertiary'] - The background color class (without 'bg-'): 'body-tertiary', 'primary', 'dark', etc.
+ * @attribute {string} [theme] - The color theme: 'light' or 'dark' (sets data-bs-theme).
+ * @attribute {string} [placement='start'] - The placement of the offcanvas: 'start', 'end', 'top', 'bottom'.
+ * @attribute {string} [navbar-placement] - The placement of the navbar itself: 'fixed-top', 'fixed-bottom', 'sticky-top', 'sticky-bottom'.
+ * @attribute {string} [container='fluid'] - The container type inside the navbar: 'fluid', 'sm', 'md', 'lg', 'xl', 'xxl', or 'standard'.
+ * @attribute {string} [title] - The title shown in the offcanvas header.
+ * @slot title - Custom HTML for the offcanvas title.
  */
 class BsSidebar extends HTMLElement {
   constructor() {
@@ -167,12 +167,14 @@ class BsSidebar extends HTMLElement {
 /**
  * A custom web component for a permanent (non-collapsible) Bootstrap sidebar.
  *
- * Attributes:
- * - width: The width of the sidebar (default: '280px').
- * - background: The background color class (without 'bg-'): 'body-tertiary' (default), etc.
- * - theme: The color theme: 'light' or 'dark' (sets data-bs-theme).
- * - title: The title shown in the sidebar header.
- * - navbar-placement: The placement of the sidebar: 'sticky-top' (default), 'fixed-top', etc.
+ * @element bs-permanent-sidebar
+ * @attribute {string} [width='280px'] - The width of the sidebar.
+ * @attribute {string} [background='body-tertiary'] - The background color class (without 'bg-'): 'body-tertiary', etc.
+ * @attribute {string} [theme] - The color theme: 'light' or 'dark' (sets data-bs-theme).
+ * @attribute {string} [title] - The title shown in the sidebar header.
+ * @attribute {string} [navbar-placement='sticky-top'] - The placement of the sidebar: 'sticky-top', 'fixed-top', etc.
+ * @attribute {string} [expand='md'] - The breakpoint at which the sidebar becomes permanent.
+ * @slot title - Custom HTML for the sidebar title.
  */
 class BsPermanentSidebar extends HTMLElement {
   constructor() {

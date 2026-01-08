@@ -4,11 +4,11 @@
  * This component wraps the standard Bootstrap spinner structure. It does not use
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - animation: The type of spinner ('border' or 'grow'). Default: 'border'.
- * - variant: The contextual color (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark').
- * - small: Boolean attribute; if present, the spinner will be smaller.
- * - label: Accessibility text for the spinner. Default: 'Loading...'.
+ * @element bs-spinner
+ * @attribute {string} [animation=border] - The type of spinner ('border' or 'grow').
+ * @attribute {string} [variant] - The contextual color (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark').
+ * @attribute {boolean} [small] - If present, the spinner will be smaller.
+ * @attribute {string} [label=Loading...] - Accessibility text for the spinner.
  */
 class BsSpinner extends HTMLElement {
   constructor() {

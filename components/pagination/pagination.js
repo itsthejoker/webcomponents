@@ -4,13 +4,12 @@
  * This component wraps the standard Bootstrap pagination structure.
  * It coordinates the creation of the pagination navigation and its items.
  *
- * Attributes:
- * - aria-label: The label for the navigation section (e.g., 'Page navigation').
- * - size: The size of the pagination: 'sm' or 'lg'.
- * - alignment: The horizontal alignment: 'center' or 'end'.
+ * @element bs-pagination
+ * @attribute {string} [aria-label='Page navigation'] - The label for the navigation section.
+ * @attribute {string} [size] - The size of the pagination: 'sm' or 'lg'.
+ * @attribute {string} [alignment] - The horizontal alignment: 'center' or 'end'.
  *
- * Slots:
- * - (default): Content containing <bs-pagination-item> elements.
+ * @slot - Content containing <bs-pagination-item> elements.
  */
 class BsPagination extends HTMLElement {
   constructor() {
@@ -120,14 +119,13 @@ class BsPagination extends HTMLElement {
  *
  * This component acts as a data holder for <bs-pagination>.
  *
- * Attributes:
- * - active: Boolean attribute; if present, this item is marked as active.
- * - disabled: Boolean attribute; if present, this item is marked as disabled.
- * - href: The URL the item points to. Default is '#'.
- * - label: Aria-label for the link (useful for icons).
+ * @element bs-pagination-item
+ * @attribute {boolean} [active] - If present, this item is marked as active.
+ * @attribute {boolean} [disabled] - If present, this item is marked as disabled.
+ * @attribute {string} [href='#'] - The URL the item points to.
+ * @attribute {string} [label] - Aria-label for the link (useful for icons).
  *
- * Slots:
- * - (default): Content for the pagination link (text or HTML).
+ * @slot - Content for the pagination link (text or HTML).
  */
 class BsPaginationItem extends HTMLElement {
   // BsPaginationItem is a data container, BsPagination does the rendering.

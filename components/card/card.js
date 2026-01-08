@@ -4,31 +4,41 @@
  * This component wraps the standard Bootstrap card structure. It does not use
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - title: The title of the card.
- * - subtitle: The subtitle of the card.
- * - img-top: URL for the image at the top of the card.
- * - img-bottom: URL for the image at the bottom of the card.
- * - img-alt: Alt text for the images.
- * - text-bg: Background color variant (e.g., 'primary', 'dark').
- * - border: Border color variant (e.g., 'primary', 'success').
- * - no-body: Boolean attribute; if present, the default slot content is not wrapped in a .card-body div.
+ * @element bs-card
  *
- * Slots:
- * - header: Content for the card header.
- * - footer: Content for the card footer.
- * - title: Custom title element (overrides title attribute).
- * - subtitle: Custom subtitle element (overrides subtitle attribute).
- * - image-top: Custom element for the top image (overrides img-top attribute).
- * - image-bottom: Custom element for the bottom image (overrides img-bottom attribute).
- * - (default): Content for the card body (wrapped in .card-body unless no-body is present).
+ * @attr {string} title - The title of the card.
+ * @attr {string} subtitle - The subtitle of the card.
+ * @attr {string} img-top - URL for the image at the top of the card.
+ * @attr {string} img-bottom - URL for the image at the bottom of the card.
+ * @attr {string} img-alt - Alt text for the images.
+ * @attr {string} text-bg - Background color variant (e.g., 'primary', 'dark').
+ * @attr {string} border - Border color variant (e.g., 'primary', 'success').
+ * @attr {boolean} no-body - If present, the default slot content is not wrapped in a .card-body div.
+ *
+ * @slot header - Content for the card header.
+ * @slot footer - Content for the card footer.
+ * @slot title - Custom title element (overrides title attribute).
+ * @slot subtitle - Custom subtitle element (overrides subtitle attribute).
+ * @slot image-top - Custom element for the top image (overrides img-top attribute).
+ * @slot image-bottom - Custom element for the bottom image (overrides img-bottom attribute).
+ * @slot - Content for the card body (wrapped in .card-body unless no-body is present).
+ *
+ * @example
+ * <bs-card title="Card title" subtitle="Card subtitle">
+ *   Some quick example text to build on the card title and make up the bulk of the card's content.
+ * </bs-card>
  */
 class BsCard extends HTMLElement {
   constructor() {
     super();
+    /** @type {boolean} */
     this._initialized = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Schedules the initial render.
+   */
   connectedCallback() {
     if (this._initialized) return;
 
@@ -38,6 +48,10 @@ class BsCard extends HTMLElement {
     }, 0);
   }
 
+  /**
+   * Renders the card structure and distributes slots.
+   * @private
+   */
   _render() {
     if (this._initialized) return;
     this._initialized = true;

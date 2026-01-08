@@ -2,8 +2,11 @@
  * A custom web component for displaying code blocks with syntax highlighting.
  * It wraps highlight.js and ensures its resources are loaded.
  *
- * Attributes:
- * - language: The language for syntax highlighting (e.g., 'html', 'javascript'). Default: 'html'.
+ * @element bs-code-block
+ *
+ * @attribute {string} [language='html'] - The language for syntax highlighting (e.g., 'html', 'javascript').
+ *
+ * @slot - Default slot for the code to be highlighted.
  */
 class BsCodeBlock extends HTMLElement {
   constructor() {

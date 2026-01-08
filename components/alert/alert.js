@@ -4,23 +4,34 @@
  * This component wraps the standard Bootstrap alert structure. It does not use
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - variant: The contextual variant (e.g., 'primary', 'success', 'danger'). Default: 'primary'.
- * - dismissible: Boolean attribute; if present, the alert will have a close button.
- * - fade: Boolean attribute; if present, the alert will fade out when dismissed.
- * - heading: The heading text for the alert.
+ * @element bs-alert
  *
- * Slots:
- * - heading: Custom heading element (overrides heading attribute).
- * - (default): Content for the alert body.
+ * @attr {string} variant - The contextual variant (e.g., 'primary', 'success', 'danger'). Default: 'primary'.
+ * @attr {boolean} dismissible - If present, the alert will have a close button.
+ * @attr {boolean} fade - If present, the alert will fade out when dismissed.
+ * @attr {string} heading - The heading text for the alert.
+ *
+ * @slot heading - Custom heading element (overrides heading attribute).
+ * @slot - Content for the alert body.
+ *
+ * @example
+ * <bs-alert variant="success" dismissible fade heading="Success!">
+ *   Your changes have been saved successfully.
+ * </bs-alert>
  */
 class BsAlert extends HTMLElement {
   constructor() {
     super();
+    /** @type {bootstrap.Alert|null} */
     this.alert = null;
+    /** @type {boolean} */
     this._initialized = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Schedules the initial render.
+   */
   connectedCallback() {
     if (this._initialized) return;
 
@@ -30,6 +41,10 @@ class BsAlert extends HTMLElement {
     }, 0);
   }
 
+  /**
+   * Called when the element is removed from the document.
+   * Disposes of the Bootstrap alert instance.
+   */
   disconnectedCallback() {
     if (this.alert) {
       this.alert.dispose();
@@ -37,6 +52,10 @@ class BsAlert extends HTMLElement {
     }
   }
 
+  /**
+   * Renders the alert structure and initializes the Bootstrap plugin.
+   * @private
+   */
   _render() {
     if (this._initialized) return;
     this._initialized = true;
@@ -154,6 +173,10 @@ class BsAlert extends HTMLElement {
     }
   }
 
+  /**
+   * Ensures the Bootstrap alert instance is initialized.
+   * @private
+   */
   _ensureAlert() {
     if (!this._initialized) {
       this._render();

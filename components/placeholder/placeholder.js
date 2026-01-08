@@ -4,17 +4,12 @@
  * This component wraps the standard Bootstrap placeholder structure.
  * It does not use Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - col: Grid column width (1-12).
- * - width: Custom width (e.g., '75%', '100px').
- * - size: Sizing modifier ('lg', 'sm', 'xs').
- * - variant: Theme color ('primary', 'success', etc.).
- * - animation: Animation style ('glow', 'wave'). Note: animation is typically 
- *              applied to a parent element, so this component will wrap its 
- *              internal placeholder in a div with the animation class if provided.
- *
- * Static Methods:
- * - placeholderize(element, options): Replaces the content of an element with placeholders.
+ * @element bs-placeholder
+ * @attribute {string} [col] - Grid column width (1-12).
+ * @attribute {string} [width] - Custom width (e.g., '75%', '100px').
+ * @attribute {string} [size] - Sizing modifier: 'lg', 'sm', or 'xs'.
+ * @attribute {string} [variant] - Theme color: 'primary', 'success', etc.
+ * @attribute {string} [animation] - Animation style: 'glow' or 'wave'.
  */
 class BsPlaceholder extends HTMLElement {
   constructor() {

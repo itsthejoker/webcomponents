@@ -7,7 +7,11 @@
  * out the spinner and fades in the container.
  *
  * The component expects to be manually styled to zero opacity initially:
- * main-container { opacity: 0; }
+ * `main-container { opacity: 0; }`
+ *
+ * @element main-container
+ *
+ * @slot - Default slot for the main content of the page.
  */
 class MainContainer extends HTMLElement {
   constructor() {

@@ -1,22 +1,37 @@
 /**
  * A custom web component for a Bootstrap accordion.
  *
- * This component acts as a container for <bs-accordion-item> elements.
+ * This component acts as a container for `<bs-accordion-item>` elements.
  * It does not use Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - flush: Boolean attribute; if present, removes some borders and rounded corners.
- * - always-open: Boolean attribute; if present, items stay open when another item is opened.
+ * @element bs-accordion
  *
- * Slots:
- * - (default): Content containing <bs-accordion-item> elements.
+ * @attr {boolean} flush - If present, removes some borders and rounded corners.
+ * @attr {boolean} always-open - If present, items stay open when another item is opened.
+ *
+ * @slot - Content containing `<bs-accordion-item>` elements.
+ *
+ * @example
+ * <bs-accordion flush>
+ *   <bs-accordion-item title="Item 1" expanded>
+ *     Content for item 1.
+ *   </bs-accordion-item>
+ *   <bs-accordion-item title="Item 2">
+ *     Content for item 2.
+ *   </bs-accordion-item>
+ * </bs-accordion>
  */
 class BsAccordion extends HTMLElement {
   constructor() {
     super();
+    /** @type {boolean} */
     this._initialized = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Initializes the accordion and generates a unique ID if none exists.
+   */
   connectedCallback() {
     if (this._initialized) return;
     
@@ -30,6 +45,10 @@ class BsAccordion extends HTMLElement {
     }, 0);
   }
 
+  /**
+   * Renders the accordion container and moves children into it.
+   * @private
+   */
   _render() {
     if (this._initialized) return;
     this._initialized = true;
@@ -62,27 +81,32 @@ class BsAccordion extends HTMLElement {
  *
  * This component wraps the standard Bootstrap accordion item structure.
  *
- * Attributes:
- * - title: The title text for the accordion item header.
- * - expanded: Boolean attribute; if present, the item is expanded by default.
+ * @element bs-accordion-item
  *
- * Slots:
- * - header: Custom header element (overrides the title attribute).
- * - (default): Content for the accordion item body.
+ * @attr {string} title - The title text for the accordion item header.
+ * @attr {boolean} expanded - If present, the item is expanded by default.
  *
- * Methods:
- * - show(): Shows the accordion item.
- * - hide(): Hides the accordion item.
- * - toggle(): Toggles the accordion item.
- * - dispose(): Destroys the collapse instance.
+ * @slot header - Custom header element (overrides the title attribute).
+ * @slot - Content for the accordion item body.
+ *
+ * @example
+ * <bs-accordion-item title="Accordion Item #1" expanded>
+ *   <strong>This is the first item's accordion body.</strong>
+ * </bs-accordion-item>
  */
 class BsAccordionItem extends HTMLElement {
   constructor() {
     super();
+    /** @type {bootstrap.Collapse|null} */
     this.collapse = null;
+    /** @type {boolean} */
     this._initialized = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Schedules the initial render.
+   */
   connectedCallback() {
     if (this._initialized) return;
 
@@ -92,6 +116,10 @@ class BsAccordionItem extends HTMLElement {
     }, 0);
   }
 
+  /**
+   * Called when the element is removed from the document.
+   * Disposes of the Bootstrap collapse instance.
+   */
   disconnectedCallback() {
     if (this.collapse) {
       this.collapse.dispose();
@@ -99,6 +127,10 @@ class BsAccordionItem extends HTMLElement {
     }
   }
 
+  /**
+   * Renders the accordion item structure and initializes the Bootstrap plugin.
+   * @private
+   */
   _render() {
     if (this._initialized) return;
     this._initialized = true;
@@ -220,6 +252,10 @@ class BsAccordionItem extends HTMLElement {
     }
   }
 
+  /**
+   * Ensures the Bootstrap collapse instance is initialized.
+   * @private
+   */
   _ensureCollapse() {
     if (!this._initialized) {
       this._render();

@@ -4,20 +4,28 @@
  * This component wraps the standard Bootstrap badge structure. It does not use
  * Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - variant: The contextual variant (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'). Default: 'secondary'.
- * - pill: Boolean attribute; if present, the badge will have a rounded-pill shape.
- * - text: Simple text content for the badge (overridden by child content).
+ * @element bs-badge
  *
- * Slots:
- * - (default): Content for the badge.
+ * @attr {string} variant - The contextual variant (e.g., 'primary', 'secondary', 'success', 'danger', 'warning', 'info', 'light', 'dark'). Default: 'secondary'.
+ * @attr {boolean} pill - If present, the badge will have a rounded-pill shape.
+ * @attr {string} text - Simple text content for the badge (overridden by child content).
+ *
+ * @slot - Content for the badge.
+ *
+ * @example
+ * <bs-badge variant="primary" pill text="New"></bs-badge>
  */
 class BsBadge extends HTMLElement {
   constructor() {
     super();
+    /** @type {boolean} */
     this._initialized = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Schedules the initial render.
+   */
   connectedCallback() {
     if (this._initialized) return;
 
@@ -27,6 +35,10 @@ class BsBadge extends HTMLElement {
     }, 0);
   }
 
+  /**
+   * Renders the badge structure and moves children into it.
+   * @private
+   */
   _render() {
     if (this._initialized) return;
     this._initialized = true;

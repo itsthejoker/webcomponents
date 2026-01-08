@@ -5,12 +5,8 @@
  * This component does not use Shadow DOM to ensure full compatibility with 
  * Bootstrap's global CSS and handles the 'data-bs-theme' attribute on the <html> element.
  *
- * Attributes:
- * - storage-key: The localStorage key to store the theme preference (default: 'theme').
- *
- * Examples:
- * <theme-toggle></theme-toggle>
- * <theme-toggle storage-key="my-app-theme"></theme-toggle>
+ * @element theme-toggle
+ * @attribute {string} [storage-key=theme] - The localStorage key to store the theme preference.
  */
 class ThemeToggle extends HTMLElement {
   constructor() {

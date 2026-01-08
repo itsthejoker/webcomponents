@@ -1,31 +1,23 @@
 /**
  * A custom web component for a Bootstrap carousel.
  *
- * This component acts as a container for <bs-carousel-item> elements.
+ * This component acts as a container for `<bs-carousel-item>` elements.
  * It does not use Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - indicators: Boolean attribute; if present, shows slide indicators.
- * - controls: Boolean attribute; if present, shows previous/next controls.
- * - fade: Boolean attribute; if present, uses a fade transition instead of a slide.
- * - dark: Boolean attribute; if present, uses darker controls, indicators, and captions.
- * - ride: 'carousel' (autoplay on load) or 'true' (autoplay after first interaction).
- * - interval: The amount of time to delay between automatically cycling an item (default: 5000).
- * - keyboard: Whether the carousel should react to keyboard events (default: true).
- * - pause: 'hover' (default) or 'false'.
- * - touch: Whether the carousel should support touch swipe interactions (default: true).
- * - wrap: Whether the carousel should cycle continuously or have hard stops (default: true).
+ * @element bs-carousel
  *
- * Slots:
- * - (default): Content containing <bs-carousel-item> elements.
+ * @attribute {boolean} [indicators] - If present, shows slide indicators.
+ * @attribute {boolean} [controls] - If present, shows previous/next controls.
+ * @attribute {boolean} [fade] - If present, uses a fade transition instead of a slide.
+ * @attribute {boolean} [dark] - If present, uses darker controls, indicators, and captions.
+ * @attribute {string} [ride] - 'carousel' (autoplay on load) or 'true' (autoplay after first interaction).
+ * @attribute {number} [interval=5000] - The amount of time to delay between automatically cycling an item.
+ * @attribute {boolean} [keyboard=true] - Whether the carousel should react to keyboard events.
+ * @attribute {string} [pause='hover'] - 'hover' or 'false'.
+ * @attribute {boolean} [touch=true] - Whether the carousel should support touch swipe interactions.
+ * @attribute {boolean} [wrap=true] - Whether the carousel should cycle continuously or have hard stops.
  *
- * Methods:
- * - cycle(): Starts cycling through the carousel items.
- * - pause(): Stops the carousel from cycling.
- * - next(): Cycles to the next item.
- * - prev(): Cycles to the previous item.
- * - to(index): Cycles the carousel to a particular frame (0-based).
- * - dispose(): Destroys the carousel instance.
+ * @slot - Default slot for `<bs-carousel-item>` elements.
  */
 class BsCarousel extends HTMLElement {
   constructor() {
@@ -166,11 +158,35 @@ class BsCarousel extends HTMLElement {
     }
   }
 
+  /**
+   * Starts cycling through the carousel items.
+   */
   cycle() { this._ensureCarousel() && this.carousel.cycle(); }
+
+  /**
+   * Stops the carousel from cycling.
+   */
   pause() { this._ensureCarousel() && this.carousel.pause(); }
+
+  /**
+   * Cycles to the next item.
+   */
   next() { this._ensureCarousel() && this.carousel.next(); }
+
+  /**
+   * Cycles to the previous item.
+   */
   prev() { this._ensureCarousel() && this.carousel.prev(); }
+
+  /**
+   * Cycles the carousel to a particular frame (0-based).
+   * @param {number} index - The index of the item to cycle to.
+   */
   to(index) { this._ensureCarousel() && this.carousel.to(index); }
+
+  /**
+   * Destroys the carousel instance.
+   */
   dispose() {
     if (this.carousel) {
       this.carousel.dispose();
@@ -191,17 +207,17 @@ class BsCarousel extends HTMLElement {
 /**
  * A custom web component for a Bootstrap carousel item.
  *
- * Attributes:
- * - active: Boolean attribute; if present, marks this item as the active slide.
- * - interval: The amount of time to delay before automatically cycling to the next item.
- * - img: URL for the image.
- * - alt: Alt text for the image.
- * - caption-title: Title for the caption.
- * - caption-text: Text for the caption.
+ * @element bs-carousel-item
  *
- * Slots:
- * - caption: Custom content for the carousel caption (overrides caption-title and caption-text).
- * - (default): Content to be placed inside the carousel item (instead of img if img is not provided).
+ * @attribute {boolean} [active] - If present, marks this item as the active slide.
+ * @attribute {number} [interval] - The amount of time to delay before automatically cycling to the next item.
+ * @attribute {string} [img] - URL for the image.
+ * @attribute {string} [alt=''] - Alt text for the image.
+ * @attribute {string} [caption-title] - Title for the caption.
+ * @attribute {string} [caption-text] - Text for the caption.
+ *
+ * @slot caption - Custom content for the carousel caption (overrides caption-title and caption-text).
+ * @slot - Default slot for content to be placed inside the carousel item (instead of img if img is not provided).
  */
 class BsCarouselItem extends HTMLElement {
   constructor() {

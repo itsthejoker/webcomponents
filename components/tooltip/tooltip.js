@@ -4,21 +4,15 @@
  * This component wraps its content and attaches a Bootstrap tooltip to itself.
  * It does not use Shadow DOM to ensure full compatibility with Bootstrap's global CSS.
  *
- * Attributes:
- * - title: The tooltip title (or use data-bs-title).
- * - placement: 'top', 'bottom', 'left', 'right', 'auto'. Default: 'top'.
- * - animation: Boolean (default: true).
- * - delay: Delay in ms, or object {show: 500, hide: 100}.
- * - html: Boolean; if present, allows HTML in title.
- * - trigger: 'click', 'hover', 'focus', 'manual'. Default: 'hover focus'.
- * - custom-class: Custom class for the tooltip.
- * - offset: Offset of the tooltip relative to its target.
- *
- * Static Methods:
- * - BsTooltip.init(element, options): Initializes a tooltip on the given element.
- * - BsTooltip.dispose(element): Disposes of the tooltip on the given element.
- * - BsTooltip.reinit(element): Re-initializes the tooltip on the given element.
- * - BsTooltip.initAll(container): Initializes all tooltips within a container.
+ * @element bs-tooltip
+ * @attribute {string} [title] - The tooltip title (or use data-bs-title).
+ * @attribute {string} [placement=top] - 'top', 'bottom', 'left', 'right', 'auto'.
+ * @attribute {boolean} [animation=true] - Whether to animate the tooltip.
+ * @attribute {string|object} [delay=0] - Delay in ms, or object {show: 500, hide: 100}.
+ * @attribute {boolean} [html] - If present, allows HTML in title.
+ * @attribute {string} [trigger=hover focus] - 'click', 'hover', 'focus', 'manual'.
+ * @attribute {string} [custom-class] - Custom class for the tooltip.
+ * @attribute {string|array} [offset=[0, 6]] - Offset of the tooltip relative to its target.
  */
 class BsTooltip extends HTMLElement {
   constructor() {

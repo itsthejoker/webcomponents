@@ -2,28 +2,43 @@
  * A custom button element that displays a loading spinner when clicked.
  * It uses a variant attribute to apply Bootstrap button styles to an internal button.
  *
- * Examples:
+ * @element loading-button
  *
- * 1. With a variant and additional classes:
- *    <loading-button variant="primary" class="mt-2">Submit</loading-button>
+ * @attr {string} variant - The Bootstrap button variant (e.g., primary, danger, link).
+ * @attr {string} value - The text to display if no innerHTML is provided.
  *
- * 2. With an href (rendered as a button):
- *    <loading-button variant="link" href="/dashboard/">Go to Dashboard</loading-button>
+ * @example
+ * <!-- 1. With a variant and additional classes -->
+ * <loading-button variant="primary" class="mt-2">Submit</loading-button>
  *
- * 3. With a custom onclick handler:
- *    <loading-button variant="danger" onclick="alert('Action triggered!')">Delete</loading-button>
+ * @example
+ * <!-- 2. With an href (rendered as a button) -->
+ * <loading-button variant="link" href="/dashboard/">Go to Dashboard</loading-button>
+ *
+ * @example
+ * <!-- 3. With a custom onclick handler -->
+ * <loading-button variant="danger" onclick="alert('Action triggered!')">Delete</loading-button>
  */
 class LoadingButton extends HTMLElement {
   constructor() {
     super();
+    /** @type {Function} */
     this._enableBound = this.enable.bind(this);
+    /** @type {Function} */
     this._handleClickBound = this._handleClick.bind(this);
+    /** @type {boolean} */
     this._isLoading = false;
+    /** @type {boolean} */
     this._isSimulatingClick = false;
   }
 
+  /**
+   * Called when the element is added to the document.
+   * Initializes the internal button and event listeners.
+   */
   connectedCallback() {
     if (!this.button) {
+      /** @type {string} */
       this.originalContent =
         this.innerHTML.trim() || this.getAttribute("value") || "";
       this.render();
@@ -36,6 +51,10 @@ class LoadingButton extends HTMLElement {
     window.addEventListener("beforeunload", this._enableBound);
   }
 
+  /**
+   * Called when the element is removed from the document.
+   * Cleans up event listeners and ensures the button is enabled.
+   */
   disconnectedCallback() {
     if (this.button) {
       this.button.removeEventListener("click", this._handleClickBound);
@@ -45,7 +64,11 @@ class LoadingButton extends HTMLElement {
     this.enable();
   }
 
+  /**
+   * Renders the internal button and copies attributes from the custom element.
+   */
   render() {
+    /** @type {HTMLButtonElement} */
     this.button = document.createElement("button");
 
     const variant = this.getAttribute("variant");
@@ -80,6 +103,12 @@ class LoadingButton extends HTMLElement {
     this.appendChild(this.button);
   }
 
+  /**
+   * Handles the click event on the internal button.
+   * Shows the loading spinner and prevents double submissions.
+   * @param {MouseEvent} e - The click event.
+   * @private
+   */
   _handleClick(e) {
     if (this._isSimulatingClick) {
       return;
@@ -94,6 +123,7 @@ class LoadingButton extends HTMLElement {
     // Capture the current width to prevent the button from changing size
     // when the spinner is injected.
     const currentWidth = this.button.getBoundingClientRect().width;
+    /** @type {string} */
     this._originalWidthStyle = this.button.style.width;
 
     // 1. Mark as loading and visually disable
@@ -125,6 +155,9 @@ class LoadingButton extends HTMLElement {
     }, 10);
   }
 
+  /**
+   * Re-enables the button and removes the loading spinner.
+   */
   enable() {
     this._isLoading = false;
     if (this.button) {

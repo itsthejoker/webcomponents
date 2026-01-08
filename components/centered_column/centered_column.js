@@ -5,19 +5,23 @@
  * It automatically extracts column-related classes (e.g., `col-8`, `col-md-6`) from the 
  * host element and applies them to the internal column div.
  * 
- * Examples:
- * 1. Default (col-8):
- *    <centered-column>Centred content</centered-column>
+ * @element centered-column
  * 
- * 2. Custom widths:
- *    <centered-column class="col-10 col-md-8 col-lg-6">
- *      Responsive centered content
- *    </centered-column>
+ * @example
+ * <!-- Default (col-8) -->
+ * <centered-column>Centred content</centered-column>
  * 
- * 3. With additional Bootstrap utilities:
- *    <centered-column class="col-8 mt-5 text-center">
- *      Centered column with margin top and centered text
- *    </centered-column>
+ * @example
+ * <!-- Custom widths -->
+ * <centered-column class="col-10 col-md-8 col-lg-6">
+ *   Responsive centered content
+ * </centered-column>
+ * 
+ * @example
+ * <!-- With additional Bootstrap utilities -->
+ * <centered-column class="col-8 mt-5 text-center">
+ *   Centered column with margin top and centered text
+ * </centered-column>
  */
 class CenteredColumn extends HTMLElement {
   constructor() {
