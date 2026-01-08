@@ -60,6 +60,7 @@ class BsCarousel extends HTMLElement {
     if (!this.id) {
       this.id = `carousel-${Math.random().toString(36).substr(2, 9)}`;
     }
+    const carouselId = `${this.id}-inner`;
 
     const showIndicators = this.hasAttribute('indicators');
     const showControls = this.hasAttribute('controls');
@@ -76,7 +77,7 @@ class BsCarousel extends HTMLElement {
     this.style.display = 'block';
 
     const carouselElement = document.createElement('div');
-    carouselElement.id = this.id;
+    carouselElement.id = carouselId;
     carouselElement.className = 'carousel slide';
     if (isFade) carouselElement.classList.add('carousel-fade');
     if (isDark) carouselElement.classList.add('carousel-dark');
@@ -100,11 +101,11 @@ class BsCarousel extends HTMLElement {
     carouselElement.innerHTML = `
       <div class="carousel-indicators"></div>
       <div class="carousel-inner"></div>
-      <button class="carousel-control-prev" type="button" data-bs-target="#${this.id}" data-bs-slide="prev">
+      <button class="carousel-control-prev" type="button" data-bs-target="#${carouselId}" data-bs-slide="prev">
         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Previous</span>
       </button>
-      <button class="carousel-control-next" type="button" data-bs-target="#${this.id}" data-bs-slide="next">
+      <button class="carousel-control-next" type="button" data-bs-target="#${carouselId}" data-bs-slide="next">
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="visually-hidden">Next</span>
       </button>
@@ -121,13 +122,17 @@ class BsCarousel extends HTMLElement {
     );
 
     items.forEach((item, index) => {
-      innerContainer.appendChild(item);
+      let actualItem = item;
+      if (item.localName === 'bs-carousel-item') {
+        actualItem = item.querySelector('.carousel-item') || item;
+      }
+      innerContainer.appendChild(actualItem);
       
       if (showIndicators) {
-        const isActive = item.hasAttribute('active') || item.classList.contains('active');
+        const isActive = actualItem.hasAttribute('active') || actualItem.classList.contains('active');
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.setAttribute('data-bs-target', `#${this.id}`);
+        btn.setAttribute('data-bs-target', `#${carouselId}`);
         btn.setAttribute('data-bs-slide-to', index);
         btn.setAttribute('aria-label', `Slide ${index + 1}`);
         if (isActive) {
@@ -223,18 +228,11 @@ class BsCarouselItem extends HTMLElement {
     const captionTextAttr = this.getAttribute('caption-text');
     const active = this.hasAttribute('active');
 
-    const itemElement = document.createElement('div');
-    itemElement.className = 'carousel-item';
-    if (active) itemElement.classList.add('active');
+    this.classList.add('carousel-item');
+    if (active) this.classList.add('active');
 
     if (intervalAttr) {
-      itemElement.setAttribute('data-bs-interval', intervalAttr);
-    }
-
-    // Pass through classes from the host element to the underlying div
-    const hostClasses = this.getAttribute('class');
-    if (hostClasses) {
-      itemElement.className += ` ${hostClasses}`;
+      this.setAttribute('data-bs-interval', intervalAttr);
     }
 
     // Capture children
@@ -243,16 +241,13 @@ class BsCarouselItem extends HTMLElement {
       fragment.appendChild(this.firstChild);
     }
 
-    this.innerHTML = '';
-    this.appendChild(itemElement);
-
-    itemElement.innerHTML = `
+    this.innerHTML = `
       <div class="carousel-item-content"></div>
       <div class="carousel-caption d-none d-md-block"></div>
     `;
 
-    const contentContainer = itemElement.querySelector('.carousel-item-content');
-    const captionContainer = itemElement.querySelector('.carousel-caption');
+    const contentContainer = this.querySelector('.carousel-item-content');
+    const captionContainer = this.querySelector('.carousel-caption');
 
     if (imgAttr) {
       const img = document.createElement('img');
@@ -295,7 +290,7 @@ class BsCarouselItem extends HTMLElement {
     
     // Flatten content container if it only contains the image or children
     while (contentContainer.firstChild) {
-        itemElement.insertBefore(contentContainer.firstChild, captionContainer.parentElement ? captionContainer : null);
+        this.insertBefore(contentContainer.firstChild, captionContainer.parentElement ? captionContainer : null);
     }
     contentContainer.remove();
   }
